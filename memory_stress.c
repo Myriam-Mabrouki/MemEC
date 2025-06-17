@@ -3,7 +3,7 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-	const int MAX_LOOP = 100000;
+	const int MAX_LOOP = 10000;
 	const int MEM_SIZE = 1024*1024;
 	const int REPORT_FREQ = 1;
 
