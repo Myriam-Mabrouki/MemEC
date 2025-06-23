@@ -4,7 +4,6 @@
 # This script is mainly inspired by the documentation in linux.enea
 
 
-
 # 1 - Configure the CPU sets
 
 # a. Create the cpusets (RT & nRT)
@@ -52,5 +51,19 @@ echo 1 | sudo tee /sys/fs/cgroup/cpuset/nrt/cpuset.sched_load_balance
 
 
 # 4 - Move general purpose tasks to the GP partition
+
+# Define the input file
+INFILE=processes
+
+# Write PIDs of all running tasks in the input file
+ps aux | awk {'print $2'} > processes
+
+# Read the input file line by line
+while read -r LINE
+do
+    # Move general purpose tasks to the GP partition
+    echo $LINE | sudo tee /sys/fs/cgroup/cpuset/nrt/tasks
+done < "$INFILE"
+
 
 # 5 - Move IRQs  to the GP CPUs
