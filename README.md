@@ -18,3 +18,4 @@ This repository contains **memory energy consumption experiments**.
 - **Step three :** Execute ```./make_executables.sh```. Now you have a folder untitled _executables_ with the sequential TACLeBench programs.
 - **Step four :** 
 - **Step five :**
+- **Step six :**
