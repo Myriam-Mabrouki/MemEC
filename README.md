@@ -21,3 +21,4 @@ This repository contains **memory energy consumption experiments**.
 - **Step six :**
 - **Step seven :**
 - **Step eight :**
+- **Step nine :**
