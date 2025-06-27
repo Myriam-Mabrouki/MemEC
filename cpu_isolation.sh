@@ -55,6 +55,9 @@ echo 1 | sudo tee /sys/fs/cgroup/cpuset/nrt/cpuset.sched_load_balance
 # Define the input file
 INFILE=processes
 
+# Delete the input file if it already exists
+rm $INFILE
+
 # Write PIDs of all running tasks in the input file
 ps aux | awk {'print $2'} > processes
 
