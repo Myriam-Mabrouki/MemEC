@@ -52,22 +52,21 @@ echo 1 | sudo tee /sys/fs/cgroup/cpuset/nrt/cpuset.sched_load_balance
 
 # 4 - Move general purpose tasks to the GP partition
 
-# Define the input file
-INFILE=processes
-
-# Delete the input file if it already exists
-rm $INFILE
+# Define the input file containing all processes
+IN_PROCESSES=processes
 
 # Write PIDs of all running tasks in the input file
 #ps aux | awk {'print $2'} | tail -n +2 > processes
-cat /sys/fs/cgroup/cpuset/tasks > processes
+cat /sys/fs/cgroup/cpuset/tasks > $IN_PROCESSES
 
 # Read the input file line by line
 while read -r LINE
 do
     # Move general purpose tasks to the GP partition
-    echo $LINE | sudo tee /sys/fs/cgroup/cpuset/nrt/tasks
-done < "$INFILE"
+    # echo $LINE | sudo tee /sys/fs/cgroup/cpuset/nrt/tasks
+    cgclassify -g cpuset:nrt $LINE
+    
+done < "$IN_PROCESSES"
 
 
 # 5 - Move IRQs  to the GP CPUs
