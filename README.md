@@ -10,7 +10,14 @@ This repository contains **memory energy consumption experiments**.
 - ```memory_stress.c``` : program that stresses the memory (with malloc)
 
 
-## Experiments 
+## Experiment
+
+### Hardware and software configurations
+
+For this experiment, we measure the energy consumption of a [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) with the power analyser [Otii Ace Pro](https://www.qoitech.com/otii-ace/).
+The operating system used in the Raspberry is a Raspberry Pi OS, an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
+
+### Protocol
 
 - **Step one :** Grant execute permissions for shell programs with the following command :
   ```chmod +x make_executables.sh time_measurements.sh energy_executions.sh energy_executions.sh cpu_isolation.sh```
