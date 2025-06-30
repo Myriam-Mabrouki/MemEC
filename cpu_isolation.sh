@@ -71,3 +71,19 @@ done < "$INFILE"
 
 
 # 5 - Move IRQs  to the GP CPUs
+
+# Define the input file containing all IRQS
+IN_IRQ=irqs
+
+# Write all IRQs in the input file
+ls /proc/irq | head -n -1 > $IN_IRQ
+
+# Set the default affinity to CPU 0, 1 or 2 to make sure that new interrupts won’t be handled by the real-time CPUs. The set {CPU0, CPU1, CPU2} is represented as a bitmask set to 7.
+echo 7 | sudo tee /proc/irq/default_smp_affinity
+
+# Read the input file line by line
+while read -r LINE
+do
+    # Move IRQs to the nRT partition
+    echo 7 | sudo tee /proc/irq/$LINE/smp_affinity
+done < "$IN_IRQ"
