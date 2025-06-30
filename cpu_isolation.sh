@@ -59,7 +59,8 @@ INFILE=processes
 rm $INFILE
 
 # Write PIDs of all running tasks in the input file
-ps aux | awk {'print $2'} > processes
+#ps aux | awk {'print $2'} | tail -n +2 > processes
+cat /sys/fs/cgroup/cpuset/tasks > processes
 
 # Read the input file line by line
 while read -r LINE
