@@ -10,6 +10,17 @@ This repository contains **memory energy consumption experiments**.
 - ```memory_stress.c``` : program that stresses the memory (with malloc)
 
 
+## Warning
+
+Before starting the experiments, make you sure you have these tools install :
+- perf
+- libcgroup
+
+If you do not have these tools installed and you have the same software configurations, you can follow next steps : 
+- ```sudo apt install linux-perf```
+- ```sudo apt install libcgroup2```
+- ```sudo apt install libcgroup-dev```
+
 ## Experiment
 
 ### Hardware and software configurations
