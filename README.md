@@ -22,6 +22,9 @@ If you do not have these tools installed and you have the same software configur
 - ```sudo apt install libcgroup-dev```
 Otherwise, you can look for the installation process corresponding to the OS you are using.
 
+### In progress (I don't know if it is necessary)
+You will also have to add in the ```/boot/firmware/cmdfile``` file to enable cgroups v1 :
+```cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory systemd.unified_cgroup_hierarchy=0 ```
 
 ## Experiment
 
