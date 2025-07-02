@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# This script create a directory, compile TACLeBench programs 
+# This script create a directory, compile TACLeBench programs
 # and move them into the created directory.
 
 # 1 - Get TACLeBench tasks
@@ -11,18 +11,18 @@ tar -xvzf master.tar.gz
 # Delete the .tar.gz file
 rm -f master.tar.gz
 
-# 2 - Create a directory 
+# 2 - Create a directory
 # Delete "executables" directory if it exists
 rm -rf executables
 # Create a new one
 mkdir executables
-# Go to the location of the programs 
+# Go to the location of the programs
 cd tacle-bench-master/bench/sequential/
 
 # 3 - Compile and move each task into "executables" directory
 # For each task...
 for dir in *
-do	
+do
 	# Display its directory
 	echo $dir
 	# Go to its directory
