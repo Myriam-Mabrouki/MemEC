@@ -9,7 +9,7 @@ mv master TACLeBench
 rm master.tar.gz
 rmdir -rf executables
 mkdir executables
-cd tacle-bench-master/bench/sequential/
+cd TACLeBench/tacle-bench-master/bench/sequential/
 
 # For each program compile it and move the executables
 # into the previously created directory
@@ -19,6 +19,6 @@ do
 	cd $dir
 	gcc *.c
 	mv a.out $dir
-	mv $dir ../../../../executables
+	mv $dir ../../../../../executables
 	cd ..
 done
