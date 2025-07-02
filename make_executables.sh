@@ -15,7 +15,7 @@ rm master.tar.gz
 
 # 2 - Create a directory 
 # Delete "executables" directory if it exists
-rmdir -rf executables
+rm -rf executables
 # Create a new one
 mkdir executables
 # Go to the location of the programs 
