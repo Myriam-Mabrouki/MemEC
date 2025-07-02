@@ -52,6 +52,9 @@ echo 1 | sudo tee /sys/fs/cgroup/cpuset/nrt/cpuset.sched_load_balance
 
 # 4 - Move general purpose tasks to the GP partition
 
+# cat /sys/fs/cgroup/cpuset/tasks > /sys/fs/cgroup/cpuset/nrt/tasks
+# echo | sudo tee /sys/fs/cgroup/cpuset/tasks
+
 # Define the input file containing all processes
 IN_PROCESSES=processes
 
