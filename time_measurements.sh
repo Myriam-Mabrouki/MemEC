@@ -31,8 +31,8 @@ do
 	# For each execution
 	for  ((i=0; i < $n; i++))
 	do
-		# Program executed in isolation in core 3 with its priority set to the maximum
+		# Program executed in isolation in core 3
 		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
-		taskset -c 3 sudo perf stat nice -n -20 $prgm  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "time_measures_${fCPU}_${fMEM}/${prgm/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
+		taskset -c 3 sudo perf stat $prgm  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "time_measures_${fCPU}_${fMEM}/${prgm/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
 	done
 done
