@@ -4,9 +4,13 @@
 # This script is used in our experiments for executing a program 
 # while measuring the whole energy consumpion.
 
+# 1 - Check the parameters
 if [ "$#" -ne 2 ]; then
+    # Display the error message in stderr
     echo "Illegal number of parameters" >&2
+    # Display the expected format in stderr
     echo "Expected : ./energy_measurements.sh number_of_executions program_name" >&2
+    # End the program with an error 
     exit 2
 fi
 
@@ -14,9 +18,10 @@ fi
 n=$1		#1st argument = number of executions
 prgm=$2		#2nd argument = name of the chosen program
 
-# The chosen program has its priority set to the maximum possible
-# (in the user space)
+# 2 - Execution n times
+# For each execution...
 for  ((i=0; i<$n; i++))
 do
+    # Program executed in isolation in core 3 with its priority set to the maximum
 	taskset -c 3 sudo nice -n -20 ./$prgm
 done
