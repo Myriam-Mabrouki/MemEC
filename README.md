@@ -16,17 +16,22 @@ Before starting the experiments, make you sure you have these tools install :
 - perf
 - libcgroup
 
-If you do not have these tools installed and you have the same software configurations, you can follow next steps : 
+If you do not have these tools installed and you have the same software configurations (Raspberry Pi OS or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
 - ```sudo apt install linux-perf```
 - ```sudo apt install libcgroup2```
 - ```sudo apt install libcgroup-dev```
+Otherwise, you can look for the installation process corresponding to the OS you are using.
+
+### In progress (I don't know if it is necessary)
+You will also have to add in the ```/boot/firmware/cmdfile``` file to enable cgroups v1 :
+```cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory systemd.unified_cgroup_hierarchy=0 ```
 
 ## Experiment
 
 ### Hardware and software configurations
 
 For this experiment, we measure the energy consumption of a [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) with the power analyser [Otii Ace Pro](https://www.qoitech.com/otii-ace/).
-The operating system used in the Raspberry is a Raspberry Pi OS, an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
+The operating system used on the system on chip is a [Raspberry Pi OS](https://www.raspberrypi.com/software/), an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
 
 ### Protocol
 
