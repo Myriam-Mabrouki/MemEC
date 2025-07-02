@@ -8,8 +8,6 @@
 wget https://github.com/tacle/tacle-bench/archive/master.tar.gz
 # Exact the .tar.gz file
 tar -xvzf master.tar.gz
-# Rename the repository
-mv master TACLeBench
 # Delete the .tar.gz file
 rm -f master.tar.gz
 
