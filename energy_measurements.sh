@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # This script executes n times a chosen program
-# This script is used in our experiments for executing a program 
+# This script is used in our experiments for executing a program
 # while measuring the whole energy consumpion.
 
 # 1 - Check the parameters
@@ -10,7 +10,7 @@ if [ "$#" -ne 2 ]; then
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
     echo "Expected : ./energy_measurements.sh number_of_executions program_name" >&2
-    # End the program with an error 
+    # End the program with an error
     exit 2
 fi
 
