@@ -9,7 +9,7 @@ wget https://github.com/tacle/tacle-bench/archive/master.tar.gz
 # Exact the .tar.gz file
 tar -xvzf master.tar.gz
 # Delete the .tar.gz file
-rm -f master.tar.gz
+rm -f master.tar.gz master.tar.gz.1
 
 # 2 - Create a directory
 # Delete "executables" directory if it exists
