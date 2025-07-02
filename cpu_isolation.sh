@@ -68,7 +68,7 @@ do
     # Move general purpose tasks to the GP partition
     # echo $LINE | sudo tee /sys/fs/cgroup/cpuset/nrt/tasks
     cgclassify -g cpuset:nrt $LINE
-    
+
 done < "$IN_PROCESSES"
 
 
