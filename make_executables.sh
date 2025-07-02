@@ -3,8 +3,10 @@
 # This script create a directory, compile TACLeBench programs 
 # and move them into the created directory.
 
-# Delete "executables" directory if it exists, create a new one
-# and go to the location of the programs 
+wget https://github.com/tacle/tacle-bench/archive/master.tar.gz
+tar -xvzf master.tar.gz
+mv master TACLeBench
+rm master.tar.gz
 rmdir -rf executables
 mkdir executables
 cd tacle-bench-master/bench/sequential/
