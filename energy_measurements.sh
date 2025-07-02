@@ -23,5 +23,5 @@ prgm=$2		#2nd argument = name of the chosen program
 for  ((i=0; i<$n; i++))
 do
     # Program executed in isolation in core 3 with its priority set to the maximum
-	taskset -c 3 sudo nice -n -20 ./$prgm
+	taskset -c 3 sudo chrt 99 ./$prgm
 done
