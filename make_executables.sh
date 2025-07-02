@@ -19,7 +19,7 @@ rmdir -rf executables
 # Create a new one
 mkdir executables
 # Go to the location of the programs 
-cd TACLeBench/tacle-bench-master/bench/sequential/
+cd tacle-bench-master/bench/sequential/
 
 # 3 - Compile and move each task into "executables" directory
 # For each task...
@@ -34,6 +34,6 @@ do
 	# Rename the executable
 	mv a.out $dir
 	# Move the executables into the dedicated directory
-	mv $dir ../../../../../executables
+	mv $dir ../../../../executables
 	cd ..
 done
