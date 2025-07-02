@@ -10,7 +10,7 @@ This repository contains **memory energy consumption experiments**.
 - ```memory_stress.c``` : program that stresses the memory (with malloc)
 
 
-## Warning
+## Preliminaries
 
 Before starting the experiments, make you sure you have these tools install :
 - perf
