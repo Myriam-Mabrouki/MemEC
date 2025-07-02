@@ -11,7 +11,7 @@ tar -xvzf master.tar.gz
 # Rename the repository
 mv master TACLeBench
 # Delete the .tar.gz file
-rm master.tar.gz
+rm -f master.tar.gz
 
 # 2 - Create a directory 
 # Delete "executables" directory if it exists
