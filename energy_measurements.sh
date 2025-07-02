@@ -18,5 +18,5 @@ prgm=$2		#2nd argument = name of the chosen program
 # (in the user space)
 for  ((i=0; i<$n; i++))
 do
-	taskset -c 0 sudo nice -n -20 ./$prgm
+	taskset -c 3 sudo nice -n -20 ./$prgm
 done
