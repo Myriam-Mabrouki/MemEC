@@ -1,11 +1,11 @@
 #! /bin/bash
 
 # 1 - Check the parameters
-if [ "$#" -ne 6 ]; then
+if [ "$#" -ne 7 ]; then
     # Display the error message in stderr
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
-    echo "Expected : ./nom.sh number_of_executions program_name minimum_frequency maximum_frequency step 1_or_0" >&2
+    echo "Expected : ./nom.sh number_of_executions program_name minimum_CPU_frequency_in_KHz maximum_CPU_frequency_in_KHZ memory_frequency step 1_or_0" >&2
     # End the program with an error
     exit 2
 fi
