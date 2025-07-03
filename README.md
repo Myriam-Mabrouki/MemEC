@@ -21,6 +21,7 @@ If you do not have these tools installed and you have the same software configur
 - ```sudo apt install linux-perf```
 - ```sudo apt install libcgroup2```
 - ```sudo apt install libcgroup-dev```
+- ```sudo apt install linux-cpupower -y```
 Otherwise, you can look for the installation process corresponding to the OS you are using.
 
 ### In progress (I don't know if it is necessary)
