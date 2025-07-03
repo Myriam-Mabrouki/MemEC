@@ -21,17 +21,17 @@ cd tacle-bench-master/bench/sequential/
 
 # 3 - Compile and move each task into "executables" directory
 # For each task...
-for dir in *
+for DIR in *
 do
 	# Display its directory
-	echo $dir
+	echo $DIR
 	# Go to its directory
-	cd $dir
+	cd $DIR
 	# Compile it
 	gcc *.c
 	# Rename the executable
-	mv a.out $dir
+	mv a.out $DIR
 	# Move the executables into the dedicated directory
-	mv $dir ../../../../executables
+	mv $DIR ../../../../executables
 	cd ..
 done

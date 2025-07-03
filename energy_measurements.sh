@@ -15,13 +15,13 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # Parameters
-n=$1		#1st argument = number of executions
-prgm=$2		#2nd argument = name of the chosen program
+N=$1		#1st argument = number of executions
+PRGM=$2		#2nd argument = name of the chosen program
 
-# 2 - Execution n times
+# 2 - Execution N times
 # For each execution...
-for  ((i=0; i<$n; i++))
+for  ((i=0; i<$N; i++))
 do
     # Program executed in isolation in core 3 with its priority set to the maximum
-	taskset -c 3 sudo chrt 99 ./$prgm
+	taskset -c 3 sudo chrt 99 ./$PRGM
 done
