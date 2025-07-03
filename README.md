@@ -31,9 +31,22 @@ If you do not have these tools installed and you have the same software configur
 - ```sudo apt install linux-cpupower -y```
 Otherwise, you can look for the installation process corresponding to the OS you are using.
 
-### In progress (I don't know if it is necessary)
+### 2.3. Required configuration
+
+#### 2.3.1 Core isolation
+
+To perform measures in isolation, we set the parameter ```isolcpus``` in the  ```/boot/firmware/cmdline.txt``` (or ```/boot/cmdline.txt``` ) file.
+This feature allows you to isolate specific cores so that no process run on them unless you assign a process to an isolated core.
+
+The following steps show how to isolate all the cores except the core 0 : 
+- find the file to edit : ```sudo nano /boot/firmware/cmdline.txt``` (or ```sudo nano /boot/cmdline.txt``` )
+- edit the file by adding at the end of the line : ``` isolcpus=1-3```
+- restart your device to take effect : ```sudo nano reboot```
+
+#### In progress (I don't know if it is necessary)
 You will also have to add in the ```/boot/firmware/cmdfile``` file to enable cgroups v1 :
 ```cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory systemd.unified_cgroup_hierarchy=0 ```
+
 
 ## 3. Experiment
 
