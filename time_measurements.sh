@@ -8,7 +8,7 @@ if [ "$#" -ne 3 ]; then
     # Display the error message in stderr
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
-    echo "Expected : ./time_measurements.sh number_of_executions CPU_frequency memory_frequency" >&2
+    echo "Expected : ./time_measurements.sh number_of_executions CPU_frequency_in_MHz memory_frequency_in_MHz" >&2
     # End the program with an error
     exit 2
 fi
