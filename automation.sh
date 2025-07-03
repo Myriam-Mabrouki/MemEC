@@ -31,22 +31,22 @@ sudo cpupower frequency-set --min $MIN --max $MAX
 if [$NRG -eq 1]
 then
     # Energy consumption measures
-    for ((i=$MIN; i<=$MAX; i=i+$STEP))
+    for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
     do
         # Set the frequency
-        sudo cpupower frequency-set --freq $i
+        sudo cpupower frequency-set --freq $fCPU
         # Do the measures
         ./energy_measurements.sh $N $PRGM
 
     done
 else
     # Time measures
-    for ((i=$MIN; i<=$MAX; i=i+$STEP))
+    for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
     do
         # Set the frequency
-        sudo cpupower frequency-set --freq $i
+        sudo cpupower frequency-set --freq $fCPU
         # Do the measures
-        ./time_measurements.sh $N $i $fMEM
+        ./time_measurements.sh $N $fCPU $fMEM
 
     done
 fi
