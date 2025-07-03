@@ -15,6 +15,7 @@ This repository contains **memory energy consumption experiments**.
 Before starting the experiments, make you sure you have these tools install :
 - perf
 - libcgroup
+- cpupower
 
 If you do not have these tools installed and you have the same software configurations (Raspberry Pi OS or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
 - ```sudo apt install linux-perf```
