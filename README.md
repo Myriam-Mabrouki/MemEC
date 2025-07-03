@@ -17,7 +17,7 @@ Before starting the experiments, make you sure you have these tools install :
 - libcgroup
 - cpupower
 
-If you do not have these tools installed and you have the same software configurations (Raspberry Pi OS or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
+If you do not have these tools installed and you have the same software configurations ([Raspberry Pi OS](https://www.raspberrypi.com/software/) or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
 - ```sudo apt install linux-perf```
 - ```sudo apt install libcgroup2```
 - ```sudo apt install libcgroup-dev```
