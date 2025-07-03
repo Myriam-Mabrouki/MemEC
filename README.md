@@ -10,7 +10,8 @@ This repository contains **memory energy consumption experiments**.
 - ```memory_stress.c``` : program that stresses the memory (with malloc)
 
 
-## Preliminaries
+Make sure you are connected to Internet so the ```make_executables.sh``` program could work.
+If you cannot have an Internet connection on your platform, comment the whole *Step 1* part in ```make_executables.sh```, download [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) repository by yourself and transfer it to your platform.
 
 Before starting the experiments, make you sure you have these tools install :
 - perf
