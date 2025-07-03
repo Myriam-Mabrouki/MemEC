@@ -53,7 +53,9 @@ You will also have to add in the ```/boot/firmware/cmdfile``` file to enable cgr
 ### 3.1. Hardware and software configurations
 
 For this experiment, we measure the energy consumption of a [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) with the power analyser [Otii Ace Pro](https://www.qoitech.com/otii-ace/).
+The [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) has a quad-core processor and a 1GB LPDDR2 SDRAM.
 The operating system used on the system on chip is a [Raspberry Pi OS](https://www.raspberrypi.com/software/), an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
+The measures are performed on a single core (check section 2.3.). 
 
 ### 3.2. Protocol
 
