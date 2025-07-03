@@ -16,7 +16,8 @@ PRGM=$2		#2nd argument = name of the chosen program
 MIN=$3      #3rd argument = minimum frequency tested
 MAX=$4      #4th argument = maximum frequency tested
 STEP=$5     #5th argument = step
-NRG=$6      #6th argument = 1 if we want to do energy consumption measures, 0 otherwise
+fMEM=$6
+NRG=$7      #7th argument = 1 if we want to do energy consumption measures, 0 otherwise
 
 
 # 2 - Initial configurations
