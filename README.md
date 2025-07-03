@@ -45,7 +45,7 @@ The operating system used on the system on chip is a [Raspberry Pi OS](https://w
 ### 3.2. Protocol
 
 - **Step one :** Grant execute permissions for shell programs with the following command :
-  ```chmod +x make_executables.sh time_measurements.sh energy_executions.sh energy_executions.sh cpu_isolation.sh```
+  ```chmod +x *.sh```
 - **Step two :** Execute ```./make_executables.sh```. Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
 <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
