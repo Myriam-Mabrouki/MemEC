@@ -6,7 +6,7 @@ if [ "$#" -ne 7 ]; then
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
     echo "Expected : ./nom.sh number_of_executions program_name minimum_CPU_frequency maximum_CPU_frequency step memory_frequency 1_or_0" >&2
-    echo "frequencies are in MHz" >&2
+    echo "Frequencies are in MHz." >&2
     # End the program with an error
     exit 2
 fi
@@ -29,7 +29,7 @@ sudo cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 
 # 3 - Measurements
 # Choose between doing time or energy consumption measures
-if [$NRG -eq 1]
+if [$NRG -eq 1];
 then
     # Energy consumption measures
     for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
