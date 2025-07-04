@@ -12,7 +12,7 @@ fi
 
 # 2 - Set the parameters
 # Parameters are set in the file to avoid I/O
-N=1000                      # Number of executions
+N=500			    # Number of executions
 MIN=600                     # Minimum CPU frequency tested (in MHz)
 MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=400                    # Step
@@ -28,7 +28,7 @@ sudo cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 
 # 4 - Measurements
 # Choose between doing time or energy consumption measures
-if [ $ENERGY_OR_TIME -ne 1 ]
+if [ $ENERGY_OR_TIME -ne 0 ]
 then
     # Energy consumption measures
     for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
@@ -37,10 +37,10 @@ then
         sudo cpupower frequency-set --freq $(($fCPU*1000))
         # Do the measures
         # Space the measures
-        sleep(1);
+        sleep 1
         ./energy_measurements.sh $N $PRGM
         # Space the measures
-        sleep(1);
+        sleep 1
     done
 else
     # Time measures
@@ -49,10 +49,10 @@ else
         # Set the frequency
         sudo cpupower frequency-set --freq $(($fCPU*1000))
         # Space the measures
-        sleep(1);
+        sleep 1
         # Do the measures
         ./time_measurements.sh $N $fCPU $fMEM
         # Space the measures
-        sleep(1);
+        sleep 1
     done
 fi
