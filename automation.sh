@@ -72,7 +72,7 @@ sudo cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 
 # 3 - Measurements
 # Choose between doing time or energy consumption measures
-if [$NRG -eq 1];
+if (($ENERGY_OR_TIME != 1))
 then
     # Energy consumption measures
     for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
