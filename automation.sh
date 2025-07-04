@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # 1 - Check the parameters
-if [ "$#" -ne 7 ]; then
+if [ "$#" -ne 7 ] && [ "$#" -ne 0 ]; then
     # Display the error message in stderr
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
