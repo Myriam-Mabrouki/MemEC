@@ -19,7 +19,6 @@ if [ "$#" -ne 7 ] && [ "$#" -ne 0 ]; then
     echo "- frequencies are in MHz and the last parameter " >&2
     echo "- the last parameter is 1 for energy consumption measurements and 0 for time measurements"
     echo "- program_name could be set at 0 if you are doing time measuments since it will measure all sequential TACLeBench programs"
-    echo "- "
     # End the program with an error
     exit 2
 fi
@@ -72,7 +71,7 @@ sudo cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 
 # 3 - Measurements
 # Choose between doing time or energy consumption measures
-if (($ENERGY_OR_TIME != 1))
+if [ $ENERGY_OR_TIME -ne 1 ]
 then
     # Energy consumption measures
     for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
