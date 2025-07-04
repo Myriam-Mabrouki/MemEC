@@ -79,7 +79,11 @@ then
         # Set the frequency
         sudo cpupower frequency-set --freq $(($fCPU*1000))
         # Do the measures
+        # Space the measures
+        sleep(1);
         ./energy_measurements.sh $N $PRGM
+        # Space the measures
+        sleep(1);
     done
 else
     # Time measures
@@ -87,7 +91,11 @@ else
     do
         # Set the frequency
         sudo cpupower frequency-set --freq $(($fCPU*1000))
+        # Space the measures
+        sleep(1);
         # Do the measures
         ./time_measurements.sh $N $fCPU $fMEM
+        # Space the measures
+        sleep(1);
     done
 fi
