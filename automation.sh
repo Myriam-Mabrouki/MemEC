@@ -5,8 +5,21 @@ if [ "$#" -ne 7 ]; then
     # Display the error message in stderr
     echo "Illegal number of parameters" >&2
     # Display the expected format in stderr
-    echo "Expected : ./nom.sh number_of_executions program_name minimum_CPU_frequency maximum_CPU_frequency step memory_frequency 1_or_0" >&2
-    echo "Frequencies are in MHz." >&2
+    echo "Expected format is either :" >&2
+    # First format
+    echo "./nom.sh"
+    echo "OR"
+    # Second format
+    echo "./nom.sh number_of_executions program_name minimum_CPU_frequency maximum_CPU_frequency step memory_frequency 1_or_0" >&2
+    # Precisions about the first format
+    echo "For the first expected format :" >&2
+    echo " - parameters will be asked at runtime" >&2
+    # Precisions about the second format
+    echo "For the second format : " >&2
+    echo "- frequencies are in MHz and the last parameter " >&2
+    echo "- the last parameter is 1 for energy consumption measurements and 0 for time measurements"
+    echo "- program_name could be set at 0 if you are doing time measuments since it will measure all sequential TACLeBench programs"
+    echo "- "
     # End the program with an error
     exit 2
 fi
