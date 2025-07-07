@@ -58,12 +58,19 @@ The measures are performed on a single core (check section 2.3.1).
 - **Step two :** Execute ```./make_executables.sh```. Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
 <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
-- **Step three :** 
-- **Step four :** 
+- **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using to modify the file ```sudo nano /boot/firmware/cmdline.txt```.
+Then you will have to add the following lines : 
+```
+# Set frequencies
+sdram=freq=X
+sdram_freq_min=X
+```
+with X the required memory frequency.
+- **Step four :** Reboot your device so the memory frequency change could take effect.
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
   - N : number of executions
   - 
-- **Step six :** Launch the program ```automation_measures.sh``` with : ```./automation_measures.sh```
+- **Step six :** Launch the program ```automation_measures.sh``` with : ```./automation_measures.sh```.
 - **Step seven :**
 - **Step eight :**
 - **Step nine :**
