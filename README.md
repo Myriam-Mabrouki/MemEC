@@ -32,7 +32,7 @@ Otherwise, you can look for the installation process corresponding to the OS you
 
 #### 2.3.1 Core isolation
 
-To perform measures in isolation, we set the parameter ```isolcpus``` in the  ```/boot/firmware/cmdline.txt``` (or ```/boot/cmdline.txt``` ) file.
+To perform measures in isolation, we set the parameter ```isolcpus``` in the  ```/boot/firmware/cmdline.txt``` (or ```/boot/cmdline.txt```) file.
 This feature allows you to isolate specific cores so that no process run on them unless you assign a process to an isolated core.
 
 The following steps show how to isolate all the cores except the core 0 : 
