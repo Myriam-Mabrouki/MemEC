@@ -65,9 +65,9 @@ The measures are performed on a single core (check section 2.3.1).
 ### 3.2. Protocol
 
 - **Step one :** Grant execute permissions for shell programs with the following command :
-  ```
-  chmod +x *.sh
-  ```
+```
+chmod +x *.sh
+```
 - **Step two :** Execute 
 ```
 ./make_executables.sh
