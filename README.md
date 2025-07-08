@@ -20,7 +20,14 @@ This repository contains **memory energy consumption experiments**.
 - ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
 - ```energy_executions.sh``` : execute one program $N$ times with the highest user priority
 - ```automation_measures.sh``` : automatise time and energy measures
-- ```memory_stress.c``` : program that stresses the memory (with malloc)
+
+### 1.1. ```make_executables.sh```
+
+### 1.2. ```time_measurements.sh```
+
+### 1.3. ```energy_executions.sh```
+
+### 1.4. ```automation_measures.sh```
 
 
 ## 2. Preliminaries
@@ -119,3 +126,7 @@ sudo reboot
 ./automation_measures.sh
 ```
 - **Step seven :** If you want to test with other memory frequencies, go back to **Step three**. In our case, we test the following memory frequencies : $500$ MHz, $400$ MHz, $300$ MHz, $200$ MHz.
+
+#### 3.2.1 Time measurements
+
+#### 3.2.2 Energy measurements
