@@ -69,9 +69,13 @@ with X the required memory frequency.
 - **Step four :** Reboot your device so the memory frequency change could take effect.
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
   - N : number of executions
-  - 
-- **Step six :** Launch the program ```automation_measures.sh``` with : ```./automation_measures.sh```.
-- **Step seven :**
+  - MIN : minimum CPU frequency tested (in MHz)
+  - MAX : maximum CPU frequency tested (in MHz)
+  - STEP : the step between two CPU frequencies tested
+  - fMEM : memory frequency set (in MHz)
+  - PRGM : name of the chosen program (in case of energy measures)
+  - ENERGY_OR_TIME : boolean (0 for time measurements, 1 for energy measurements)
+- **Step six :** Launch the program ```automation_measures.sh``` with : 
 - **Step eight :**
 - **Step nine :**
 - **Step ten :**

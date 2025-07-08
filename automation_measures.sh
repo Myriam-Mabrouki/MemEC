@@ -15,7 +15,7 @@ fi
 N=500			    # Number of executions
 MIN=600                     # Minimum CPU frequency tested (in MHz)
 MAX=1400                    # Maximum CPU frequency tested (in MHz)
-STEP=400                    # Step
+STEP=400                    # Step between two CPU frequencies tested
 fMEM=500                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
 ENERGY_OR_TIME=1            # 0 for time measurements, 1 for energy measurements
