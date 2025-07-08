@@ -19,10 +19,8 @@ fCPU=$2		#2nd argument = current CPU frequency
 fMEM=$3		#3rd argument = current memory frequency
 
 # 2 - Create a directory
-# Delete "executables" directory if it exists
-rm -rf ./time_measures_${fCPU}_${fMEM}
-# Create a new one
-mkdir time_measures_${fCPU}_${fMEM}
+# Create "results" and "time_measures" directories if not exists
+mkdir -p results/time_measures
 
 # 3 - Execution N times
 # For each task...
@@ -31,8 +29,10 @@ do
 	# For each execution
 	for  ((i=0; i < $N; i++))
 	do
+		#
+		mkdir -p $PRGM
 		# Program executed in isolation in core 3
 		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
-		taskset -c 3 sudo perf stat $PRGM  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "time_measures_${fCPU}_${fMEM}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
+		taskset -c 3 sudo perf stat $PRGM  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "${PRGM/*\/}/time_measures_${fCPU}_${fMEM}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
 	done
 done
