@@ -65,8 +65,14 @@ The measures are performed on a single core (check section 2.3.1).
 ### 3.2. Protocol
 
 - **Step one :** Grant execute permissions for shell programs with the following command :
-  ```chmod +x *.sh```
-- **Step two :** Execute ```./make_executables.sh```. Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
+  ```
+  chmod +x *.sh
+  ```
+- **Step two :** Execute 
+```
+./make_executables.sh
+```
+Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
 <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
 
