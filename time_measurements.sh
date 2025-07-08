@@ -18,21 +18,17 @@ N=$1		#1st argument = number of executions
 fCPU=$2		#2nd argument = current CPU frequency
 fMEM=$3		#3rd argument = current memory frequency
 
-# 2 - Create a directory
-# Create "results" and "time_measures" directories if not exists
-mkdir -p results/time_measures
-
-# 3 - Execution N times
+# 2 - Execution N times
 # For each task...
 for PRGM in executables/*
 do
 	# For each execution
 	for  ((i=0; i < $N; i++))
 	do
-		# Create a directory for the task
-		mkdir -p $PRGM
+		# Create "results" and "time_measures" directories if not exists and a directory for the task
+		mkdir -p results/time_measures/${PRGM/*\/}
 		# Program executed in isolation in core 3
 		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
-		taskset -c 3 sudo perf stat $PRGM  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "${PRGM/*\/}/time_measures_${fCPU}_${fMEM}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
+		taskset -c 3 sudo perf stat $PRGM  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "results/time_measures/${PRGM/*\/}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
 	done
 done
