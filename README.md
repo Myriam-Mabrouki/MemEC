@@ -5,13 +5,13 @@ This repository contains **memory energy consumption experiments**.
 
 1. [Files includes](#1-files-included)
 2. [Preliminaries](#2-preliminaries)
-    2.1. [Internet connection](#21-internet-connection)
-    2.2. [Required tools](#22-required-tools)
-    2.3. [Required configuration](#23-required-configuration)
-        2.3.1. [Core isolation](#231-core-isolation)  
+    1. [Internet connection](#21-internet-connection)
+    2. [Required tools](#22-required-tools)
+    3. [Required configuration](#23-required-configuration)
+        1. [Core isolation](#231-core-isolation)  
 3. [Experiments](#3-experiments)
-    3.1 [Hardware and software configurations](#31-hardware-and-software-configurations)
-    3.2 [Protocol](#32-protocol)
+    1. [Hardware and software configurations](#31-hardware-and-software-configurations)
+    2. [Protocol](#32-protocol)
 
 
 ## 1. Files included 
