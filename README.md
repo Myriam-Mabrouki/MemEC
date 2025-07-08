@@ -24,8 +24,10 @@ Before starting the experiments, make you sure you have these tools install :
 - cpupower
 
 If you do not have these tools installed and you have the same software configurations ([Raspberry Pi OS](https://www.raspberrypi.com/software/) or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
-- ```sudo apt install linux-perf```
-- ```sudo apt install linux-cpupower -y```
+```
+sudo apt install linux-perf
+sudo apt install linux-cpupower -y
+```
 Otherwise, you can look for the installation process corresponding to the OS you are using.
 
 ### 2.3. Required configuration
@@ -36,9 +38,19 @@ To perform measures in isolation, we set the parameter ```isolcpus``` in the  ``
 This feature allows you to isolate specific cores so that no process run on them unless you assign a process to an isolated core.
 
 The following steps show how to isolate all the cores except the core 0 : 
-- find the file to edit : ```sudo nano /boot/firmware/cmdline.txt``` (or ```sudo nano /boot/cmdline.txt``` )
+- find the file to edit : 
+```
+sudo nano /boot/firmware/cmdline.txt
+``` 
+or 
+```
+sudo nano /boot/cmdline.txt
+``` 
 - edit the file by adding at the end of the line : ``` isolcpus=1-3```
-- restart your device to take effect : ```sudo nano reboot```
+- restart your device to take effect : 
+```
+sudo reboot
+```
 
 
 ## 3. Experiment
@@ -57,7 +69,11 @@ The measures are performed on a single core (check section 2.3.1).
 - **Step two :** Execute ```./make_executables.sh```. Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
 <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
-- **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using to modify the file ```sudo nano /boot/firmware/cmdline.txt```.
+
+- **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using the command
+```
+sudo nano /boot/firmware/cmdline.txt
+```
 Then you will have to add the following lines : 
 ```
 # Set frequencies
@@ -66,6 +82,9 @@ sdram_freq_min=X
 ```
 with X the required memory frequency.
 - **Step four :** Reboot your device so the memory frequency change could take effect.
+```
+sudo reboot
+```
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
   - N : number of executions
   - MIN : minimum CPU frequency tested (in MHz)
@@ -75,6 +94,9 @@ with X the required memory frequency.
   - PRGM : name of the chosen program (in case of energy measures)
   - ENERGY_OR_TIME : boolean (0 for time measurements, 1 for energy measurements)
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
+```
+./automation_measures.sh
+```
 - **Step seven :** If you want to test with other memory frequencies, go back to **Step three :**. In our case, we test the following memory frequencies : 500 MHz, 400 MHz, 300 MHz, 200MHz.
 - **Step eight :**
 - **Step nine :**
