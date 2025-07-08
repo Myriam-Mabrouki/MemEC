@@ -1,7 +1,7 @@
 # MemEC
 This repository contains **memory energy consumption experiments**.
 
-## 1. Programs 
+## 1. Files included 
 
 - ```make_executables.sh``` : download and compile executables of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) 
 - ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation N times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
