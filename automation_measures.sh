@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# This script executes either energy_measurements.sh or time_measurements.sh and changes CPU frequency between two consecutive executions. 
+
 # 1 - Check the parameters
 if [ "$#" -ne 0 ]
 then
@@ -35,9 +37,9 @@ then
     do
         # Set the frequency
         sudo cpupower frequency-set --freq $(($fCPU*1000))
-        # Do the measures
         # Space the measures
         sleep 1
+        # Do the measures
         ./energy_measurements.sh $N $PRGM
         # Space the measures
         sleep 1

@@ -23,7 +23,7 @@ cd tacle-bench-master/bench/sequential/
 # For each task...
 for DIR in *
 do
-	# Display its directory
+	# Display directory's name (which is also the task's name)
 	echo $DIR
 	# Go to its directory
 	cd $DIR
@@ -31,7 +31,7 @@ do
 	gcc *.c
 	# Rename the executable
 	mv a.out $DIR
-	# Move the executables into the dedicated directory
+	# Move the executable into the dedicated directory
 	mv $DIR ../../../../executables
 	cd ..
 done
