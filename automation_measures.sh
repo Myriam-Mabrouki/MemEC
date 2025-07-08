@@ -14,13 +14,13 @@ fi
 
 # 2 - Set the parameters
 # Parameters are set in the file to avoid I/O
-N=500			    # Number of executions
+N=500			            # Number of executions
 MIN=600                     # Minimum CPU frequency tested (in MHz)
 MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=400                    # Step between two CPU frequencies tested
 fMEM=500                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
-ENERGY=1            # 0 for time measurements, 1 for energy measurements
+ENERGY=1                    # 0 for time measurements, 1 for energy measurements
 
 # 3 - Initial configurations
 # Set the CPUFreq governor
