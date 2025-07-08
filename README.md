@@ -75,6 +75,7 @@ with X the required memory frequency.
   - PRGM : name of the chosen program (in case of energy measures)
   - ENERGY_OR_TIME : boolean (0 for time measurements, 1 for energy measurements)
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
+- **Step seven :** If you want to test with other memory frequencies, go back to **Step three :**. In our case, we test the following memory frequencies : 500 MHz, 400 MHz, 300 MHz, 200MHz.
 - **Step eight :**
 - **Step nine :**
 - **Step ten :**
