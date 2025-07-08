@@ -92,13 +92,13 @@ with $X$ the required memory frequency.
 sudo reboot
 ```
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
-  - N : number of executions (default = 500)
-  - MIN : minimum CPU frequency tested (in MHz) (default = 600)
-  - MAX : maximum CPU frequency tested (in MHz) (default = 1400)
-  - STEP : the step between two CPU frequencies tested (default = 400)
-  - fMEM : memory frequency set (in MHz) (default = 500)
-  - PRGM : name of the chosen program (in case of energy measures) (default = executables/statemate)
-  - ENERGY_OR_TIME : boolean (0 for time measurements, 1 for energy measurements) (default = 1)
+  - $N$ : number of executions (default = 500)
+  - $MIN$ : minimum CPU frequency tested (in MHz) (default = 600)
+  - $MAX$ : maximum CPU frequency tested (in MHz) (default = 1400)
+  - $STEP$ : the step between two CPU frequencies tested (default = 400)
+  - $fMEM$ : memory frequency set (in MHz) (default = 500)
+  - $PRGM$ : name of the chosen program (in case of energy measures) (default = executables/statemate)
+  - $ENERGY\_OR\_TIME$ : boolean (0 for time measurements, 1 for energy measurements) (default = 1)
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
 ```
 ./automation_measures.sh
