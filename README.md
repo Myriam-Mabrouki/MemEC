@@ -14,9 +14,10 @@ This repository contains **memory energy consumption experiments**.
     3. [Required configuration](#23-required-configuration)
 3. [Experiments](#3-experiments)
     1. [Hardware and software configurations](#31-hardware-and-software-configurations)
-    2. [Protocol](#32-protocol)
-        1. [3.2.1 Time measurements](#321-time-measurements)
-        2. [3.2.2 Energy measurements](#322-energy-measurements)
+    2. [Protocol](#32-experimental-protocol)
+        1. [General protocol](#321-general-protocol)
+        2. [Time measurements](#322-time-measurements)
+        3. [Energy measurements](#323-energy-measurements)
 
 
 ## 1. Files included 
@@ -85,7 +86,9 @@ The [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model
 The operating system used on the system on chip is a [Raspberry Pi OS](https://www.raspberrypi.com/software/), an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
 The measures are performed on a single core (check section 2.3.1). 
 
-### 3.2. Protocol
+### 3.2. Experimental protocol
+
+#### 3.2.1 General protocol
 
 - **Step one :** Grant execute permissions for shell programs with the following command :
 ```
@@ -132,6 +135,6 @@ sudo reboot
 ```
 - **Step seven :** If you want to test with other memory frequencies, go back to **Step three**. In our case, we test the following memory frequencies : $500$ MHz, $400$ MHz, $300$ MHz, $200$ MHz.
 
-#### 3.2.1 Time measurements
+#### 3.2.2 Time measurements
 
-#### 3.2.2 Energy measurements
+#### 3.2.3 Energy measurements
