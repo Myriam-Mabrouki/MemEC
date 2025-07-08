@@ -4,14 +4,19 @@ This repository contains **memory energy consumption experiments**.
 ## Table of contents
 
 1. [Files includes](#1-files-included)
+    1. [```make_executables.sh```](#11-make_executablessh)
+    2. [```time_measurements.sh```](#12-time_measurementssh)
+    3. [```energy_executions.sh```](#13-energy_executionssh)
+    4. [```automation_measures.sh```](#14-automation_measuressh)
 2. [Preliminaries](#2-preliminaries)
     1. [Internet connection](#21-internet-connection)
     2. [Required tools](#22-required-tools)
     3. [Required configuration](#23-required-configuration)
-        1. [Core isolation](#231-core-isolation)  
 3. [Experiments](#3-experiments)
     1. [Hardware and software configurations](#31-hardware-and-software-configurations)
     2. [Protocol](#32-protocol)
+        1. [3.2.1 Time measurements](#321-time-measurements)
+        2. [3.2.2 Energy measurements](#322-energy-measurements)
 
 
 ## 1. Files included 
