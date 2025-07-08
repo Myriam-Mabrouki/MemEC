@@ -17,8 +17,8 @@ This repository contains **memory energy consumption experiments**.
 ## 1. Files included 
 
 - ```make_executables.sh``` : download and compile executables of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) 
-- ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation N times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
-- ```energy_executions.sh``` : execute one program N times with the highest user priority
+- ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
+- ```energy_executions.sh``` : execute one program $N$ times with the highest user priority
 - ```automation_measures.sh``` : automatise time and energy measures
 - ```memory_stress.c``` : program that stresses the memory (with malloc)
 
@@ -44,8 +44,6 @@ sudo apt install linux-cpupower -y
 Otherwise, you can look for the installation process corresponding to the OS you are using.
 
 ### 2.3. Required configuration
-
-#### 2.3.1 Core isolation
 
 To perform measures in isolation, we set the parameter ```isolcpus``` in the  ```/boot/firmware/cmdline.txt``` (or ```/boot/cmdline.txt```) file.
 This feature allows you to isolate specific cores so that no process run on them unless you assign a process to an isolated core.
@@ -106,15 +104,15 @@ sudo reboot
 ```
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
 
-| Parameter       | Description                                                                     | Default value         |
-| --------------- | ------------------------------------------------------------------------------- | --------------------- |
-| $\text{N}$      | number of executions                                                            | 500                   |
-| $\text{MIN}$    | minimum CPU frequency tested (in MHz)                                           | 600                   |
-| $\text{MAX}$    | maximum CPU frequency tested (in MHz)                                           | 1400                  |
-| $\text{STEP}$   | the step between two CPU frequencies tested                                     | 400                   |
-| $\text{fMEM}$   | memory frequency set (in MHz)                                                   | 500                   |
-| $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate |
-| $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements)                    | 1                     |
+| Parameter       | Description                                                                     | Default value           |
+| --------------- | ------------------------------------------------------------------------------- | ----------------------- |
+| $\text{N}$      | number of executions                                                            | $500$                   |
+| $\text{MIN}$    | minimum CPU frequency tested (in MHz)                                           | $600$                   |
+| $\text{MAX}$    | maximum CPU frequency tested (in MHz)                                           | $1400$                  |
+| $\text{STEP}$   | the step between two CPU frequencies tested                                     | $400$                   |
+| $\text{fMEM}$   | memory frequency set (in MHz)                                                   | $500$                   |
+| $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate   |
+| $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements)                    | $1$                     |
 
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
 ```
