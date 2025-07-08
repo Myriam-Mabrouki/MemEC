@@ -80,7 +80,7 @@ Then you will have to add the following lines :
 sdram=freq=X
 sdram_freq_min=X
 ```
-with X the required memory frequency.
+with $X$ the required memory frequency.
 - **Step four :** Reboot your device so the memory frequency change could take effect.
 ```
 sudo reboot
@@ -97,7 +97,7 @@ sudo reboot
 ```
 ./automation_measures.sh
 ```
-- **Step seven :** If you want to test with other memory frequencies, go back to **Step three :**. In our case, we test the following memory frequencies : 500 MHz, 400 MHz, 300 MHz, 200MHz.
+- **Step seven :** If you want to test with other memory frequencies, go back to **Step three :**. In our case, we test the following memory frequencies : $500$ MHz, $400$ MHz, $300$ MHz, $200$ MHz.
 - **Step eight :**
 - **Step nine :**
 - **Step ten :**
