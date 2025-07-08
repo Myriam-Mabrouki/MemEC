@@ -93,15 +93,15 @@ sudo reboot
 ```
 - **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
 
-| Parameter       | Description                                                                               |
-| --------------- | ----------------------------------------------------------------------------------------- |
-| $\text{N}$      | number of executions (default = 500)                                                      |
-| $\text{MIN}$    | minimum CPU frequency tested (in MHz) (default = 600)                                     |
-| $\text{MAX}$    | maximum CPU frequency tested (in MHz) (default = 1400)                                    |
-| $\text{STEP}$   | the step between two CPU frequencies tested (default = 400)                               |
-| $\text{fMEM}$   | memory frequency set (in MHz) (default = 500)                                             |
-| $\text{PRGM}$   | name of the chosen program (in case of energy measures) (default = executables/statemate) |
-| $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements) (default = 1)                |
+| Parameter       | Description                                                                     | Default value         |
+| --------------- | ------------------------------------------------------------------------------- | --------------------- |
+| $\text{N}$      | number of executions                                                            | 500                   |
+| $\text{MIN}$    | minimum CPU frequency tested (in MHz)                                           | 600                   |
+| $\text{MAX}$    | maximum CPU frequency tested (in MHz)                                           | 1400                  |
+| $\text{STEP}$   | the step between two CPU frequencies tested                                     | 400                   |
+| $\text{fMEM}$   | memory frequency set (in MHz)                                                   | 500                   |
+| $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate |
+| $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements)                    | 1                     |
 
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
 ```
