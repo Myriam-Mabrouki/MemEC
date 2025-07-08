@@ -53,7 +53,7 @@ sudo reboot
 ```
 
 
-## 3. Experiment
+## 3. Experiments
 
 ### 3.1. Hardware and software configurations
 
@@ -68,7 +68,7 @@ The measures are performed on a single core (check section 2.3.1).
 ```
 chmod +x *.sh
 ```
-- **Step two :** Execute 
+- **Step two :** Execute the script ```make_executables.sh```.
 ```
 ./make_executables.sh
 ```
@@ -76,7 +76,7 @@ Now you have a folder untitled _executables_ with the sequential [TACLeBench](ht
 
 <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
 
-- **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using the command
+- **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using the command :
 ```
 sudo nano /boot/firmware/cmdline.txt
 ```
