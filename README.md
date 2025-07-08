@@ -21,7 +21,6 @@ If you cannot have an Internet connection on your platform, comment the whole **
 
 Before starting the experiments, make you sure you have these tools install :
 - perf
-- libcgroup
 - cpupower
 
 If you do not have these tools installed and you have the same software configurations ([Raspberry Pi OS](https://www.raspberrypi.com/software/) or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
