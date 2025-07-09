@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <dirent.h>
+#include <sys/stat.h>
 #define MAX_LENGTH 1024
 
-int main()
+int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file) 
 {
-	// CPU and memory frequencies
+  // CPU and memory frequencies
 	int fCPU, fMEM = 500;
 	// Number of executions
 	int N = 500;
@@ -14,17 +15,6 @@ int main()
 	float avg1 = 0.01, avg2 = 0.008, avg3 = 0.003;
 	// Intervals
 	float begin1, end1, begin2, end2, begin3, end3;
-
-	// Create a file pointer and open the file "test" in read mode.
-	FILE* input_file = fopen("test", "r");
-	// Create a file pointer and open the file "res" in write mode.
-	FILE* output_file = fopen("test_modified", "w");
-	// Check if the files were opened successfully.
-	if (input_file == NULL || output_file == NULL)
-	{
-		// Print an error message to the standard error stream if at least one file cannot be opened.
-		fprintf(stderr, "Unable to open file!\n");
-	}
 
 	// Line counter
 	int lc = 0;
@@ -82,10 +72,53 @@ int main()
 		// Write the modified line into the output file.
 		fputs(line, output_file);
 	}
+	
+	return 0;
+}
 
-	// Close the file streams.
-	fclose(input_file);
-	fclose(output_file);
+int main()
+{
+	DIR *d1, *d2;
+    struct dirent *dir1, *dir2;
+    struct stat filestat1, filestat2;
 
+	d1 = opendir("results/energy_measures");
+    if (!d1) {
+		fprintf(stderr, "Unable to open directory results/energy_measures\n");
+        return EXIT_FAILURE;
+	}
+	while ((dir1 = readdir(d1)) != NULL) {
+		char dirname[MAX_LENGTH];
+		sprintf(dirname, "results/energy_measures/%s", dir1->d_name);
+		stat(dirname, &filestat1);
+		//TODO: regex plutôt que la dernière condition
+		if( !(S_ISDIR(filestat1.st_mode) && strcmp(dir1->d_name, ".") && strcmp(dir1->d_name, "..") && strcmp(dir1->d_name, "statemate_modified")) )
+			continue;
+		printf("%s\n", dir1->d_name);
+		d2 = opendir(dirname);
+		if (!d2) {
+			fprintf(stderr, "Unable to open directory %s\n", dirname);
+        	return EXIT_FAILURE;
+		}
+		while ((dir2 = readdir(d2)) != NULL) {
+			char input_filename[MAX_LENGTH];
+			sprintf(input_filename, "results/energy_measures/%s/%s", dir1->d_name, dir2->d_name);
+			stat(input_filename, &filestat2);
+			if( !S_ISDIR(filestat2.st_mode) ) {
+				FILE* input_file = fopen(input_filename, "r");
+				char output_filename[MAX_LENGTH];
+				sprintf(output_filename, "results/energy_measures/%s_modified/modified_%s", dir1->d_name, dir2->d_name);
+				FILE* output_file = fopen(output_filename, "w");
+				if (input_file == NULL || output_file == NULL) {
+					// Print an error message to the standard error stream if at least one file cannot be opened.
+					fprintf(stderr, "Unable to open file!\n");
+				}
+				add_FCPU_fMEM_in_csv(input_file, output_file);
+				// Close the file streams.
+				fclose(input_file);
+				fclose(output_file);
+			}
+		}
+	}
 	return 0;
 }
