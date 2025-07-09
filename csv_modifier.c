@@ -13,7 +13,7 @@ int main()
 	// Averages execution times
 	float avg1 = 0.01, avg2 = 0.008, avg3 = 0.003;
 	// Intervals
-	float begin1 = 0, end1 = N * avg1, begin2 = end1 + 2, end2 = begin2 + N * avg2, begin3 = end2 + 3, end3 = begin3 + N * avg3;
+	float begin1, end1, begin2, end2, begin3, end3;
 
 	// Create a file pointer and open the file "test" in read mode.
 	FILE* input_file = fopen("test", "r");
@@ -34,6 +34,8 @@ int main()
 	char addition[MAX_LENGTH];
 	// Timestamp for power consumption
 	float timestamp;
+	// Value of power consumption
+	float value;
 
 	// Read each line from the input file and store it in the 'line' buffer.
 	while (fgets(line, sizeof(line), input_file)) {
@@ -42,6 +44,21 @@ int main()
 		char tmp[MAX_LENGTH];
         strcpy(tmp, line);
         timestamp = atof(strtok(tmp, ","));
+
+		if (begin1 == -1 && lc != 1) {
+			value = atof(strtok(NULL, ","));
+			if (value >= 2.5) {
+				begin1 = timestamp;
+				end1 = begin1 + N * avg1;
+				begin2 = end1 + 2;
+				end2 = begin2 + N * avg2;
+				begin3 = end2 + 2;
+				end3 = begin3 + N * avg3;
+			} else {
+				timestamp = -2;
+			}
+		}
+		
 		if (begin1 <= timestamp && timestamp <= end1)
 			fCPU = 600;
 		else if (begin2 <= timestamp && timestamp <= end2)
