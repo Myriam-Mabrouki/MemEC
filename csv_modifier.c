@@ -5,14 +5,12 @@
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
 
-int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file) 
+int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, float avg1, float avg2, float avg3, int fMEM) 
 {
-  // CPU and memory frequencies
-	int fCPU, fMEM = 500;
+  // CPU frequency
+	int fCPU;
 	// Number of executions
 	int N = 500;
-	// Averages execution times
-	float avg1 = 0.01, avg2 = 0.008, avg3 = 0.003;
 	// Intervals
 	float begin1, end1, begin2, end2, begin3, end3;
 
@@ -81,6 +79,8 @@ int main()
 	DIR *d1, *d2;
     struct dirent *dir1, *dir2;
     struct stat filestat1, filestat2;
+	float avg1, avg2, avg3;
+	int fMEM
 
 	d1 = opendir("results/energy_measures");
     if (!d1) {
@@ -105,6 +105,28 @@ int main()
 			sprintf(input_filename, "results/energy_measures/%s/%s", dir1->d_name, dir2->d_name);
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
+				char tmp[MAX_LENGTH];
+                                strcpy(tmp, dir2->d_name);
+                                strtok(tmp, "_");
+                                strtok(NULL, "_");
+                                strtok(NULL, "_");
+                                strtok(NULL, "_");
+                                fMEM = atoi(strtok(NULL, "_"));
+				if (fMEM == 200) {
+					avg1 = 0.006906; avg2 = 0.005003; avg3 = 0.004107;
+				}
+				else if (fMEM == 300) {
+					avg1 = 0.006565; avg2 = 0.004605; avg3 = 0.003808;
+				}
+				else if (fMEM == 400) {
+					avg1 = 0.006056; avg2 = 0.004398; avg3 = 0.003572;
+				}
+				else if (fMEM == 500) {
+					avg1 = 0.006303; avg2 = 0.004330; avg3 = 0.003495;
+				}
+				else {
+					fprintf(stderr, "Invalid memory frequency value\n");
+				}
 				FILE* input_file = fopen(input_filename, "r");
 				char output_filename[MAX_LENGTH];
 				sprintf(output_filename, "results/energy_measures/%s_modified/modified_%s", dir1->d_name, dir2->d_name);
@@ -113,7 +135,7 @@ int main()
 					// Print an error message to the standard error stream if at least one file cannot be opened.
 					fprintf(stderr, "Unable to open file!\n");
 				}
-				add_FCPU_fMEM_in_csv(input_file, output_file);
+				add_FCPU_fMEM_in_csv(input_file, output_file, avg1, avg2, avg3, fMEM);
 				// Close the file streams.
 				fclose(input_file);
 				fclose(output_file);
