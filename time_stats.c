@@ -61,7 +61,7 @@ int main()
                 sprintf(output_filename, "results/time_measures/%s/%s_results_execution_time.txt", dir1->d_name, dir1->d_name);
                 FILE* output_file = fopen(output_filename, "w");
                 // Print the header to the output file
-		fprintf(output_file, "exec_time CPU_freq memory_freq\n");
+		        fprintf(output_file, "exec_time CPU_freq memory_freq\n");
                 d2 = opendir(dirname);
                 if (d2) {
                     while ((dir2 = readdir(d2)) != NULL) {
