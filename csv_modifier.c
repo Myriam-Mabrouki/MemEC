@@ -113,16 +113,16 @@ int main()
                                 strtok(NULL, "_");
                                 fMEM = atoi(strtok(NULL, "_"));
 				if (fMEM == 200) {
-					avg1 = 0.006906; avg2 = 0.005003; avg3 = 0.004107;
+					avg1 = 0.006950; avg2 = 0.005036; avg3 = 0.004172;
 				}
 				else if (fMEM == 300) {
-					avg1 = 0.006565; avg2 = 0.004605; avg3 = 0.003808;
+					avg1 = 0.005481; avg2 = 0.003733; avg3 = 0.002712;
 				}
 				else if (fMEM == 400) {
-					avg1 = 0.006056; avg2 = 0.004398; avg3 = 0.003572;
+					avg1 = 0.005961; avg2 = 0.003345; avg3 = 0.002721;
 				}
 				else if (fMEM == 500) {
-					avg1 = 0.006303; avg2 = 0.004330; avg3 = 0.003495;
+					avg1 = 0.006023; avg2 = 0.003594; avg3 = 0.002678;
 				}
 				else {
 					fprintf(stderr, "Invalid memory frequency value\n");
