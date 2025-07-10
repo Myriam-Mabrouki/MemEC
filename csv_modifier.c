@@ -35,7 +35,7 @@ int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, float avg1, float 
 
 		if (begin1 == -1 && lc != 1) {
 			value = atof(strtok(NULL, ","));
-			if (value >= 2.5) {
+			if (value >= 2.6) {
 				begin1 = timestamp;
 				end1 = begin1 + N * avg1;
 				begin2 = end1 + 2;
@@ -80,7 +80,7 @@ int main()
     struct dirent *dir1, *dir2;
     struct stat filestat1, filestat2;
 	float avg1, avg2, avg3;
-	int fMEM
+	float fMEM;
 
 	d1 = opendir("results/energy_measures");
     if (!d1) {
@@ -126,6 +126,7 @@ int main()
 				}
 				else {
 					fprintf(stderr, "Invalid memory frequency value\n");
+					exit(EXIT_FAILURE);
 				}
 				FILE* input_file = fopen(input_filename, "r");
 				char output_filename[MAX_LENGTH];
