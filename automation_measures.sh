@@ -14,7 +14,7 @@ fi
 
 # 2 - Set the parameters
 # Parameters are set in the file to avoid I/O
-N=500			            # Number of executions
+N=1000			            # Number of executions
 MIN=600                     # Minimum CPU frequency tested (in MHz)
 MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=400                    # Step between two CPU frequencies tested
