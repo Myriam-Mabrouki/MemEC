@@ -109,10 +109,10 @@ sudo nano /boot/firmware/cmdline.txt
 Then you will have to add the following lines : 
 ```
 # Set frequencies
-sdram=freq=X
+sdram_freq=X
 sdram_freq_min=X
 ```
-with $X$ the required memory frequency.
+and replace $X$ by the memory frequency you want.
 - **Step four :** Reboot your device so the memory frequency change could take effect.
 ```
 sudo reboot
@@ -131,7 +131,7 @@ sudo reboot
 
 - **Step six :** Launch the program ```automation_measures.sh``` with : 
 ```
-./automation_measures.sh
+sudo ./automation_measures.sh
 ```
 - **Step seven :** If you want to test with other memory frequencies, go back to **Step three**. In our case, we test the following memory frequencies : $500$ MHz, $400$ MHz, $300$ MHz, $200$ MHz.
 
