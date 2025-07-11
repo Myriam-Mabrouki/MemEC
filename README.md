@@ -100,7 +100,7 @@ chmod +x *.sh
 ```
 Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
-⚠️ <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the section 2.1.
+⚠️ <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the [section 2.1.](#21-internet-connection)
 
 - **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using the command :
 ```
