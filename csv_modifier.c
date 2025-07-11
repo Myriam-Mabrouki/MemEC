@@ -10,7 +10,7 @@ int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, float avg1, float 
   // CPU frequency
 	int fCPU;
 	// Number of executions
-	int N = 500;
+	int N = 1000;
 	// Intervals
 	float begin1 = -1, end1, begin2, end2, begin3, end3;
 
