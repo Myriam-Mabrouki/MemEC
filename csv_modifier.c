@@ -44,7 +44,7 @@ int begin_at_0(FILE *input_file, FILE *output_file)
 	return 0;
 }
 
-int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM) 
+int add_CPU_freq_MEM_freq_in_csv(FILE *input_file, FILE *output_file, int CPU_freq, int MEM_freq)
 {
 	// Line counter
 	int lc = 0;
@@ -65,7 +65,7 @@ int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM
 			sprintf(addition, ",\"CPU freq\",\"Memory freq\"\n");
 		else
 			// CPU and memory frequencies
-			sprintf(addition, ",%d,%d\n", fCPU, fMEM);
+			sprintf(addition, ",%d,%d\n", CPU_freq, MEM_freq);
 		// Concatenate the additional part to the input line.
 		strcat(line, addition);
 		// Write the modified line into the output file.
