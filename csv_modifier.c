@@ -158,16 +158,25 @@ int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq)
 	return 0;
 }
 
+
+int main()
+{
+	DIR *d1, *d2;
+    struct dirent *dir1, *dir2;
+    struct stat filestat1, filestat2;
+	char path[64] = "results/energy_measures";
+	int CPU_freq, MEM_freq;
+
+	d1 = opendir(path);
     if (!d1) {
-		fprintf(stderr, "Unable to open directory results/energy_measures\n");
+		fprintf(stderr, "Unable to open directory %s\n", path);
         return EXIT_FAILURE;
 	}
 	while ((dir1 = readdir(d1)) != NULL) {
 		char dirname[MAX_LENGTH];
-		sprintf(dirname, "results/energy_measures/%s", dir1->d_name);
+		sprintf(dirname, "%s/%s", path, dir1->d_name);
 		stat(dirname, &filestat1);
-		//TODO: regex plutôt que la dernière condition
-		if( !(S_ISDIR(filestat1.st_mode) && strcmp(dir1->d_name, ".") && strcmp(dir1->d_name, "..") && strcmp(dir1->d_name, "statemate")) )
+		if( !(S_ISDIR(filestat1.st_mode) && strcmp(dir1->d_name, ".") && strcmp(dir1->d_name, "..")) )
 			continue;
 		printf("%s\n", dir1->d_name);
 		d2 = opendir(dirname);
@@ -177,7 +186,7 @@ int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq)
 		}
 		while ((dir2 = readdir(d2)) != NULL) {
 			char input_filename[MAX_LENGTH];
-			sprintf(input_filename, "results/energy_measures/%s/%s", dir1->d_name, dir2->d_name);
+			sprintf(input_filename, "%s/%s/%s", path, dir1->d_name, dir2->d_name);
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
