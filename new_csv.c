@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <limits.h>
+#include <errno.h>
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
 
@@ -42,7 +44,7 @@ int begin_at_0(FILE *input_file, FILE *output_file, int _tmp, int _tmp2)
 	return 0;
 }
 
-int add_fCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM)
+int add_CPU_freq_MEM_freq_in_csv(FILE *input_file, FILE *output_file, int CPU_freq, int MEM_freq)
 {
 	// Line counter
 	int lc = 0;
@@ -63,7 +65,7 @@ int add_fCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM
 			sprintf(addition, ",\"CPU freq\",\"Memory freq\"\n");
 		else
 			// CPU and memory frequencies
-			sprintf(addition, ",%d,%d\n", fCPU, fMEM);
+			sprintf(addition, ",%d,%d\n", CPU_freq, MEM_freq);
 		// Concatenate the additional part to the input line.
 		strcat(line, addition);
 		// Write the modified line into the output file.
@@ -74,10 +76,13 @@ int add_fCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM
 }
 
 
-int f(char *input_filename, int fCPU, int fMEM, int (*fct)(FILE*, FILE*, int, int))
+int f(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*, FILE*, int, int))
 {
+	// Open 
 	FILE* input_file = fopen(input_filename, "r");
 	FILE* output_file = fopen("tmp", "w");
+	
+	// Handle opening errors
 	if (input_file == NULL) {
 		// Print an error message to the standard error stream if at least one file cannot be opened.
 		fprintf(stderr, "Unable to open input file!\n");
@@ -88,24 +93,71 @@ int f(char *input_filename, int fCPU, int fMEM, int (*fct)(FILE*, FILE*, int, in
 		fprintf(stderr, "Unable to open output file!\n");
 		return EXIT_FAILURE;
 	}
-	//begin_at_0(input_file, output_file);
-	fct(input_file, output_file, fCPU, fMEM);
-	//rewind(input_file);
+	
+	// Main operation
+	fct(input_file, output_file, CPU_freq, MEM_freq);
+	
 	// Close the file streams.
 	fclose(input_file);
 	fclose(output_file);
+
 	// Replace original file with temporary file
 	if (remove(input_filename) != 0) {
 		fprintf(stderr, "Could not remove original file\n");
 		remove("tmp");
-		return 1;
+		return EXIT_FAILURE;
 	}
-
 	if (rename("tmp", input_filename) != 0) {
 		fprintf(stderr, "Could not rename temporary file\n");
-		return 1;
+		return EXIT_FAILURE;
 	}
+
+	return 0;
 }
+
+
+int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq) 
+{
+	long int val;
+	int cpt = 0;
+	char *endptr;
+	char * strToken = strtok (str, "_");
+    while ( strToken != NULL) {
+		errno = 0;
+		val = strtol(strToken, &endptr, 10);
+
+		// Handle errors
+		if (errno == ERANGE || errno == EINVAL) {
+			fprintf(stderr, "strtol error: Invalid value\n");
+        	return EXIT_FAILURE;
+		}
+		if (errno == ERANGE) {
+			fprintf(stderr, "strtol error: Invalid range (too long or too short)\n");
+        	return EXIT_FAILURE;
+		}
+
+		// If endptr is not at the beginning of the string, an integer value has been converted
+		if (endptr != strToken) {
+			// By convention, we first value should corresponds the 
+			if (!cpt) {
+				*CPU_freq = (int) val;
+				cpt++;
+			}
+			else if (cpt == 1) {
+				*MEM_freq = (int) val;
+				cpt++;
+			}
+			else {
+				fprintf(stderr, "Too much integer values.\n");
+        		return EXIT_FAILURE;
+			}
+			
+		}
+		strToken = strtok (NULL, "_");
+    }
+	return 0;
+}
+
 
 int main()
 {
@@ -113,7 +165,7 @@ int main()
     struct dirent *dir1, *dir2;
     struct stat filestat1, filestat2;
 	char path[64] = "results/energy_measures";
-	int fCPU, fMEM;
+	int CPU_freq, MEM_freq;
 
 	d1 = opendir(path);
     if (!d1) {
@@ -137,17 +189,9 @@ int main()
 			sprintf(input_filename, "%s/%s/%s", path, dir1->d_name, dir2->d_name);
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
-				char tmp[MAX_LENGTH];
-				strcpy(tmp, dir2->d_name);
-				strtok(tmp, "_");
-				strtok(NULL, "_");
-				strtok(NULL, "_");
-				strtok(NULL, "_");
-				fCPU = atoi(strtok(NULL, "_"));
-				strtok(NULL, "_");
-				fMEM = atoi(strtok(NULL, "_"));
-				f(input_filename, fCPU, fMEM, begin_at_0);
-				f(input_filename, fCPU, fMEM, add_fCPU_fMEM_in_csv);
+				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
+				f(input_filename, CPU_freq, MEM_freq, begin_at_0);
+				f(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
 			}
 		}
 		closedir(d2);
