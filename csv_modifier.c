@@ -75,6 +75,47 @@ int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM
 	return 0;
 }
 
+
+int operation(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*, FILE*, int, int))
+{
+	// Open 
+	FILE* input_file = fopen(input_filename, "r");
+	FILE* output_file = fopen("tmp", "w");
+	
+	// Handle opening errors
+	if (input_file == NULL) {
+		// Print an error message to the standard error stream if at least one file cannot be opened.
+		fprintf(stderr, "Unable to open input file!\n");
+		return EXIT_FAILURE;
+	}
+	if (output_file == NULL) {
+		// Print an error message to the standard error stream if at least one file cannot be opened.
+		fprintf(stderr, "Unable to open output file!\n");
+		return EXIT_FAILURE;
+	}
+	
+	// Main operation
+	fct(input_file, output_file, CPU_freq, MEM_freq);
+	
+	// Close the file streams.
+	fclose(input_file);
+	fclose(output_file);
+
+	// Replace original file with temporary file
+	if (remove(input_filename) != 0) {
+		fprintf(stderr, "Could not remove original file\n");
+		remove("tmp");
+		return EXIT_FAILURE;
+	}
+	if (rename("tmp", input_filename) != 0) {
+		fprintf(stderr, "Could not rename temporary file\n");
+		return EXIT_FAILURE;
+	}
+
+	return 0;
+}
+
+
 int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq) 
 {
 	long int val;
