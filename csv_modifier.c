@@ -191,5 +191,6 @@ int main()
 		closedir(d2);
 	}
 	closedir(d1);
+
 	return 0;
 }
