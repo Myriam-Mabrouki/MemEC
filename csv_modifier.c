@@ -139,29 +139,8 @@ int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq)
 			sprintf(input_filename, "results/energy_measures/%s/%s", dir1->d_name, dir2->d_name);
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
-				char tmp[MAX_LENGTH];
-				strcpy(tmp, dir2->d_name);
-				strtok(tmp, "_");
-				strtok(NULL, "_");
-				strtok(NULL, "_");
-				strtok(NULL, "_");
-				strtok(NULL, "_");
-				fCPU = atoi(strtok(NULL, "_"));
-				strtok(NULL, "_");
-				fMEM = atoi(strtok(NULL, "_"));
-				FILE* input_file = fopen(input_filename, "r");
-				char output_filename[MAX_LENGTH];
-				sprintf(output_filename, "results/energy_measures/%s/modif_%s", dir1->d_name, dir2->d_name);
-				FILE* output_file = fopen(output_filename, "w");
-				if (input_file == NULL || output_file == NULL) {
-					// Print an error message to the standard error stream if at least one file cannot be opened.
-					fprintf(stderr, "Unable to open file!\n");
-					return EXIT_FAILURE;
-				}
-				add_FCPU_fMEM_in_csv(input_file, output_file, fCPU, fMEM);
-				// Close the file streams.
-				fclose(input_file);
-				fclose(output_file);
+				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
+				operation(input_filename, CPU_freq, MEM_freq, begin_at_0);
 			}
 		}
 		closedir(d2);
