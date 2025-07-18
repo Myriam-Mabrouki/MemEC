@@ -182,6 +182,7 @@ int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq)
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
 				operation(input_filename, CPU_freq, MEM_freq, begin_at_0);
+				operation(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
 			}
 		}
 		closedir(d2);
