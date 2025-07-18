@@ -3,9 +3,11 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <limits.h>
+#include <errno.h>
 #define MAX_LENGTH 1024
 
-int average_execution_time(FILE* input_file, FILE* output_file, int fCPU, int fMEM)
+int average_execution_time(FILE* input_file, FILE* output_file, int CPU_freq, int MEM_freq)
 {
 	// Buffer to store each line of the file.
 	char line[MAX_LENGTH];
@@ -34,11 +36,53 @@ int average_execution_time(FILE* input_file, FILE* output_file, int fCPU, int fM
         // Compute the average execution time
         long double average = (long double) sum / vc;
         // Print the result to the output file
-        fprintf(output_file, "%Lf %d %d\n", average, fCPU, fMEM);
+        fprintf(output_file, "%Lf %d %d\n", average, CPU_freq, MEM_freq);
     }
 
 
 	// End the program successfully
+	return 0;
+}
+
+int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq) 
+{
+	long int val;
+	int cpt = 0;
+	char *endptr;
+	char * strToken = strtok (str, "_");
+    while ( strToken != NULL) {
+		errno = 0;
+		val = strtol(strToken, &endptr, 10);
+
+		// Handle errors
+		if (errno == ERANGE || errno == EINVAL) {
+			fprintf(stderr, "strtol error: Invalid value\n");
+        	return EXIT_FAILURE;
+		}
+		if (errno == ERANGE) {
+			fprintf(stderr, "strtol error: Invalid range (too long or too short)\n");
+        	return EXIT_FAILURE;
+		}
+
+		// If endptr is not at the beginning of the string, an integer value has been converted
+		if (endptr != strToken) {
+			// By convention, we first value should corresponds the 
+			if (!cpt) {
+				*CPU_freq = (int) val;
+				cpt++;
+			}
+			else if (cpt == 1) {
+				*MEM_freq = (int) val;
+				cpt++;
+			}
+			else {
+				fprintf(stderr, "Too much integer values.\n");
+        		return EXIT_FAILURE;
+			}
+			
+		}
+		strToken = strtok (NULL, "_");
+    }
 	return 0;
 }
 
@@ -47,7 +91,7 @@ int main()
     DIR *d1, *d2;
     struct dirent *dir1, *dir2;
     struct stat filestat1, filestat2;
-    int fCPU, fMEM;
+    int CPU_freq, MEM_freq;
 
     d1 = opendir("results/time_measures");
     if (d1) {
@@ -72,16 +116,8 @@ int main()
                         if( !S_ISDIR(filestat2.st_mode) && strcmp(filename, output_filename)) {
                             FILE* input_file = fopen(filename, "r");
                             if (input_file) {
-                                char tmp[MAX_LENGTH];
-                                strcpy(tmp, dir2->d_name);
-                                strtok(tmp, "_");
-                                strtok(NULL, "_");
-                                strtok(NULL, "_");
-                                strtok(NULL, "_");
-                                fCPU = atoi(strtok(NULL, "_"));
-                                strtok(NULL, "_");
-                                fMEM = atoi(strtok(NULL, "_"));
-                                average_execution_time(input_file, output_file, fCPU, fMEM);
+                                get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
+                                average_execution_time(input_file, output_file, CPU_freq, MEM_freq);
                                 fclose(input_file);
                             } else {
                                 // Print an error message to the standard error stream if the file cannot be opened.
