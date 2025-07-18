@@ -46,53 +46,17 @@ int begin_at_0(FILE *input_file, FILE *output_file)
 
 int add_FCPU_fMEM_in_csv(FILE *input_file, FILE *output_file, int fCPU, int fMEM) 
 {
-	// Number of executions
-	//int N = 1000;
-	// Intervals
-	//float begin1 = -1, end1, begin2, end2, begin3, end3;
-
 	// Line counter
 	int lc = 0;
 	// Buffer to store each line of the input file.
 	char line[MAX_LENGTH];
 	// Buffer to store the addition going to the output file.
 	char addition[MAX_LENGTH];
-	// Timestamp for power consumption
-	// float timestamp;
-	// Value of power consumption
-	// float value;
 
 	// Read each line from the input file and store it in the 'line' buffer.
 	while (fgets(line, sizeof(line), input_file)) {
 		// Increments counter
 		lc++;
-		//char tmp[MAX_LENGTH];
-        //strcpy(tmp, line);
-        // timestamp = atof(strtok(tmp, ","));
-
-		// if (begin1 == -1 && lc != 1) {
-		// 	value = atof(strtok(NULL, ","));
-		// 	if (value >= 2.6) {
-		// 		begin1 = timestamp;
-		// 		end1 = begin1 + N * avg1;
-		// 		begin2 = end1 + 2;
-		// 		end2 = begin2 + N * avg2;
-		// 		begin3 = end2 + 2;
-		// 		end3 = begin3 + N * avg3;
-		// 	} else {
-		// 		timestamp = -2;
-		// 	}
-		// }
-		
-		// if (begin1 <= timestamp && timestamp <= end1)
-		// 	fCPU = 600;
-		// else if (begin2 <= timestamp && timestamp <= end2)
-		// 	fCPU = 1000;
-		// else if (begin3 <= timestamp && timestamp <= end3)
-		// 	fCPU = 1400;
-		// else
-		// 	fCPU = -1;
-		
 		// Remove the newline character.
 		line[strcspn(line, "\n")] = 0;
 		// Create the additional part
