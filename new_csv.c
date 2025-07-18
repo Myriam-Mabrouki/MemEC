@@ -76,7 +76,7 @@ int add_CPU_freq_MEM_freq_in_csv(FILE *input_file, FILE *output_file, int CPU_fr
 }
 
 
-int f(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*, FILE*, int, int))
+int operation(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*, FILE*, int, int))
 {
 	// Open 
 	FILE* input_file = fopen(input_filename, "r");
@@ -190,8 +190,8 @@ int main()
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
-				f(input_filename, CPU_freq, MEM_freq, begin_at_0);
-				f(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
+				operation(input_filename, CPU_freq, MEM_freq, begin_at_0);
+				operation(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
 			}
 		}
 		closedir(d2);
