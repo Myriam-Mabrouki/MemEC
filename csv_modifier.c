@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
 
-int begin_at_0(FILE *input_file, FILE *output_file)
+int begin_at_0(FILE *input_file, FILE *output_file, int _tmp, int _tmp2)
 {
 	// Line counter
 	int lc = 0;
