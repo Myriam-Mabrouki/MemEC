@@ -185,7 +185,8 @@ int get_CPU_freq_and_MEM_freq(	char *filename,
 	long int val;
 	int cpt = 0;
 	char *endptr;
-	char * strToken = strtok (str, "_");
+const char * separators = "_";
+	char * strToken = strtok (filename, separators);
     while ( strToken != NULL) {
 		errno = 0;
 		val = strtol(strToken, &endptr, 10);
@@ -217,7 +218,7 @@ int get_CPU_freq_and_MEM_freq(	char *filename,
 			}
 			
 		}
-		strToken = strtok (NULL, "_");
+		strToken = strtok (NULL, separators);
     }
 	return 0;
 }
