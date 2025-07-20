@@ -1,3 +1,12 @@
+/* Author : Myriam Mabrouki
+* This file is used to update CSV files in the context of energy consumption experiments.
+* (More details in : https://github.com/Myriam-Mabrouki/MemEC)
+* Each row, except the header, in original CSV files has the format : x1,x2
+* where x1 is a timestamp value and x2 is a power consumption value.
+* 1. The first update adjusts the time values by starting the first one at 0.
+* 2. The second update adds CPU and memory frequencies to each row of CVS files.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
