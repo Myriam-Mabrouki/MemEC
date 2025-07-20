@@ -262,7 +262,7 @@ int main()
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
-				operation(input_filename, CPU_freq, MEM_freq, begin_at_0);
+				operation(input_filename, 0, 0, begin_at_0);
 				operation(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
 			}
 		}
