@@ -37,7 +37,7 @@ int begin_at_0( FILE *input_file,
 	char line[MAX_LENGTH];
 	// Buffer to store the new line going to the output file.
 	char newline[MAX_LENGTH];
-	// Timestamp for power consumption
+	// Variable to store timestamp and power values.
 	float timestamp, first_timestamp, value;
 
 	// Read each line from the input file and store it in the 'line' buffer.
@@ -61,7 +61,7 @@ int begin_at_0( FILE *input_file,
 			lc++;
 		}
 
-		// CPU and memory frequencies
+		// Modify the time value value and write the power value.
 		sprintf(newline, "%f,%f\n", timestamp - first_timestamp, value);
 		// Write the modified line into the output file.
 		fputs(newline, output_file);
@@ -91,7 +91,7 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 	char first = 0;
 	// Buffer to store each line of the input file.
 	char line[MAX_LENGTH];
-	// Buffer to store the addition going to the output file.
+	// Buffer to store the additional part going to the output file.
 	char addition[MAX_LENGTH];
 
 	// Read each line from the input file and store it in the 'line' buffer.
@@ -130,7 +130,7 @@ int operation(	char *input_filename,
 				int MEM_freq, 
 				int (*fct)(FILE*, FILE*, int, int))
 {
-	// Open 
+	// Open files
 	FILE* input_file = fopen(input_filename, "r");
 	FILE* output_file = fopen("tmp", "w");
 	
@@ -153,7 +153,7 @@ int operation(	char *input_filename,
 	fclose(input_file);
 	fclose(output_file);
 
-	// Replace original file with temporary file
+	// Replace the original file with the temporary file
 	if (remove(input_filename) != 0) {
 		fprintf(stderr, "remove error: Could not remove original file\n");
 		remove("tmp");
@@ -184,9 +184,9 @@ int get_CPU_freq_and_MEM_freq(	char *filename,
 {
 	long int val;
 	char *endptr;
-const char * separators = "_";
+	const char * separators = "_";
 	char * strToken = strtok (filename, separators);
-// Integer counter in the filename
+	// Integer counter in the filename
 	int counter = 0;
 
 	// For each part in the filename
@@ -204,17 +204,20 @@ const char * separators = "_";
         	return EXIT_FAILURE;
 		}
 
-		// If endptr is not at the beginning of the string, an integer value has been converted
+		// If endptr is not at the beginning of the string, 
+		// an integer value has been converted.
 		if (endptr != strToken) {
-			// By convention, we first value should corresponds the 
+			// By convention, the first value corresponds to the CPU frequency.
 			if (!counter) {
 				*CPU_freq = (int) val;
 				counter++;
 			}
+			// By convention, the second value corresponds to the memory frequency.
 			else if (counter == 1) {
 				*MEM_freq = (int) val;
 				counter++;
 			}
+			// Integer values not expected
 			else {
 				fprintf(stderr, "strtol error: Too much integer values.\n");
         		return EXIT_FAILURE;
@@ -232,14 +235,18 @@ int main()
 	DIR *d1, *d2;
     struct dirent *dir1, *dir2;
     struct stat filestat1, filestat2;
-	char path[64] = "results/energy_measures";
 	int CPU_freq, MEM_freq;
+	// Path where the energy measures are located
+	char path[64] = "results/energy_measures";
 
+	// Open the directory containing energy measures of all programs.
 	d1 = opendir(path);
     if (!d1) {
 		fprintf(stderr, "opendir error: Unable to open directory %s\n", path);
         return EXIT_FAILURE;
 	}
+
+	// Check if it is a directory corresponding to one program.
 	while ((dir1 = readdir(d1)) != NULL) {
 		char dirname[MAX_LENGTH];
 		sprintf(dirname, "%s/%s", path, dir1->d_name);
@@ -251,11 +258,15 @@ int main()
 			&& strcmp(dir1->d_name, "backup")) )
 			continue;
 		printf("%s\n", dir1->d_name);
+
+		// Open the directory containing energy measures of one program.
 		d2 = opendir(dirname);
 		if (!d2) {
 			fprintf(stderr, "opendir error: Unable to open directory %s\n", dirname);
         	return EXIT_FAILURE;
 		}
+
+		// For each CSV file: get frequencies and apply some operations.
 		while ((dir2 = readdir(d2)) != NULL) {
 			char input_filename[MAX_LENGTH];
 			sprintf(input_filename, "%s/%s/%s", path, dir1->d_name, dir2->d_name);
@@ -266,6 +277,8 @@ int main()
 				operation(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
 			}
 		}
+
+		// Close directories.
 		closedir(d2);
 	}
 	closedir(d1);
