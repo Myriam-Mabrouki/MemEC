@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# Author: Myriam Mabrouki
 # This script executes n times TACLeBench programs and retrieves the following information :
 # total CPU time, number of cycles, number of instructions, total elapsed time.
 

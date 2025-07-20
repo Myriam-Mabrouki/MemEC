@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# Author: Myriam Mabrouki
 # This script create a directory, compile TACLeBench programs
 # and move them into the created directory.
 

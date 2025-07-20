@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# Author: Myriam Mabrouki
 # This script executes n times a chosen program
 # This script is used in our experiments for executing a program
 # while measuring the whole energy consumpion.

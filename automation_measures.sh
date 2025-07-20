@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# Author: Myriam Mabrouki
 # This script executes either energy_measurements.sh or time_measurements.sh and changes CPU frequency between two consecutive executions. 
 
 # 1 - Check the parameters
