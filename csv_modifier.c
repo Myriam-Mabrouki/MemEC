@@ -16,7 +16,10 @@
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
 
-int begin_at_0(FILE *input_file, FILE *output_file, int _tmp, int _tmp2)
+int begin_at_0( FILE *input_file, 
+				FILE *output_file, 
+				int __1, 
+				int __2)
 {
 	// Line counter
 	int lc = 0;
@@ -53,7 +56,10 @@ int begin_at_0(FILE *input_file, FILE *output_file, int _tmp, int _tmp2)
 	return 0;
 }
 
-int add_CPU_freq_MEM_freq_in_csv(FILE *input_file, FILE *output_file, int CPU_freq, int MEM_freq)
+int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file, 
+									FILE *output_file, 
+									int CPU_freq, 
+									int MEM_freq)
 {
 	// Line counter
 	int lc = 0;
@@ -84,8 +90,10 @@ int add_CPU_freq_MEM_freq_in_csv(FILE *input_file, FILE *output_file, int CPU_fr
 	return 0;
 }
 
-
-int operation(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*, FILE*, int, int))
+int operation(	char *input_filename, 
+				int CPU_freq, 
+				int MEM_freq, 
+				int (*fct)(FILE*, FILE*, int, int))
 {
 	// Open 
 	FILE* input_file = fopen(input_filename, "r");
@@ -124,8 +132,9 @@ int operation(char *input_filename, int CPU_freq, int MEM_freq, int (*fct)(FILE*
 	return 0;
 }
 
-
-int get_CPU_freq_and_MEM_freq(char *str, int *CPU_freq, int *MEM_freq) 
+int get_CPU_freq_and_MEM_freq(	char *filename, 
+								int *CPU_freq, 
+								int *MEM_freq) 
 {
 	long int val;
 	int cpt = 0;
