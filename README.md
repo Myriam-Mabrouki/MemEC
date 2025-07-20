@@ -8,6 +8,8 @@ This repository contains **memory energy consumption experiments**.
     2. [```time_measurements.sh```](#12-time_measurementssh)
     3. [```energy_executions.sh```](#13-energy_executionssh)
     4. [```automation_measures.sh```](#14-automation_measuressh)
+    5. [``csv_update.c```](#15-csv_updatec)
+    6. [```time_stats.c```](#16-time_statsc)
 2. [Preliminaries](#2-preliminaries)
     1. [Internet connection](#21-internet-connection)
     2. [Required tools](#22-required-tools)
@@ -26,6 +28,8 @@ This repository contains **memory energy consumption experiments**.
 - ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
 - ```energy_executions.sh``` : execute one program $N$ times with the highest user priority
 - ```automation_measures.sh``` : automatise time and energy measures
+- ```csv_update.c``` : updates in CSV files obtained after energy measures
+- ```time_stats.c``` : statistics about programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2)
 
 ### 1.1. ```make_executables.sh```
 
@@ -35,6 +39,9 @@ This repository contains **memory energy consumption experiments**.
 
 ### 1.4. ```automation_measures.sh```
 
+### 1.5. ```csv_update.c```
+
+### 1.6. ```time_stats.c```
 
 ## 2. Preliminaries
 
