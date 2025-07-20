@@ -183,10 +183,13 @@ int get_CPU_freq_and_MEM_freq(	char *filename,
 								int *MEM_freq) 
 {
 	long int val;
-	int cpt = 0;
 	char *endptr;
 const char * separators = "_";
 	char * strToken = strtok (filename, separators);
+// Integer counter in the filename
+	int counter = 0;
+
+	// For each part in the filename
     while ( strToken != NULL) {
 		errno = 0;
 		val = strtol(strToken, &endptr, 10);
@@ -204,13 +207,13 @@ const char * separators = "_";
 		// If endptr is not at the beginning of the string, an integer value has been converted
 		if (endptr != strToken) {
 			// By convention, we first value should corresponds the 
-			if (!cpt) {
+			if (!counter) {
 				*CPU_freq = (int) val;
-				cpt++;
+				counter++;
 			}
-			else if (cpt == 1) {
+			else if (counter == 1) {
 				*MEM_freq = (int) val;
-				cpt++;
+				counter++;
 			}
 			else {
 				fprintf(stderr, "Too much integer values.\n");
