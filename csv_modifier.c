@@ -42,19 +42,23 @@ int begin_at_0( FILE *input_file,
 
 	// Read each line from the input file and store it in the 'line' buffer.
 	while (fgets(line, sizeof(line), input_file)) {
-		// Increments counter
-		lc++;
+
+		// Retrieve time and power values.
 		char tmp[MAX_LENGTH];
         strcpy(tmp, line);
         timestamp = atof(strtok(tmp, ","));
 		value = atof(strtok(NULL, ","));
 
-		if (lc == 1) {
+		// Special case for the first line.
+		if (lc == 0) {
 			fputs(line, output_file);
+			lc++;
 			continue;
 		}
-		else if (lc == 2) {
+		// Special case for the second line.
+		else if (lc == 1) {
 			first_timestamp = timestamp;
+			lc++;
 		}
 
 		// CPU and memory frequencies
