@@ -84,7 +84,7 @@ sudo reboot
 For this experiment, we measure the energy consumption of a [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) with the power analyser [Otii Ace Pro](https://www.qoitech.com/otii-ace/).
 The [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) has a quad-core processor and a 1GB LPDDR2 SDRAM.
 The operating system used on the system on chip is a [Raspberry Pi OS](https://www.raspberrypi.com/software/), an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
-The measures are performed on a single core (check section 2.3.1). 
+The measures are performed on a single core (check [section 2.3.](#23-required-configuration)). 
 
 ### 3.2. Experimental protocol
 
@@ -100,7 +100,7 @@ chmod +x *.sh
 ```
 Now you have a folder untitled _executables_ with the sequential [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) programs.
 
-⚠️ <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check the [section 2.1.](#21-internet-connection)
+⚠️ <ins>Caution</ins> : This program will not work if you are not connected to Internet. If so, please check [section 2.1.](#21-internet-connection)
 
 - **Step three :** Set the memory frequency in ```/boot/firmware/cmdline.txt``` by using the command :
 ```
