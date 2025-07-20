@@ -96,10 +96,6 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 
 	// Read each line from the input file and store it in the 'line' buffer.
 	while (fgets(line, sizeof(line), input_file)) {
-		// Increments counter
-		lc++;
-		// Remove the newline character.
-		line[strcspn(line, "\n")] = 0;
 		// Create the additional part
 		if (!first) {
 			// Special case for the header
@@ -109,6 +105,9 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 		else {
 			// Adding CPU and memory frequencies otherwise
 			sprintf(addition, ",%d,%d\n", CPU_freq, MEM_freq);
+		}
+		// Remove the newline character.
+		line[strcspn(line, "\n")] = 0;
 		// Concatenate the additional part to the input line.
 		strcat(line, addition);
 		// Write the modified line into the output file.
