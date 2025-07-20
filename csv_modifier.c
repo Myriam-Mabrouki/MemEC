@@ -16,6 +16,16 @@
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
 
+
+/* This function updates the CSV by making the first timestamp start at 0 
+* and adjusting other time values accordingly.
+* This function considers there is a header in the CSV file.
+* FILE *input_file: CSV input file
+* FILE *output_file: CSV output file
+* int __1, int __2: parameters only used to match the "operation" function 
+* that takes a function pointer as an input
+* Returns 0 if there is no error.
+*/
 int begin_at_0( FILE *input_file, 
 				FILE *output_file, 
 				int __1, 
@@ -56,6 +66,18 @@ int begin_at_0( FILE *input_file,
 	return 0;
 }
 
+
+/* This function updates the CSV by adding CPU and memory frequencies to each row.
+* This function considers:
+* - each file has a single CPU frequency and a single memory frequency
+* - each file has a header.
+* (Thus, in one file, all rows have the same CPU frequency and the same memory frequency).
+* FILE *input_file: CSV input file
+* FILE *output_file: CSV output file
+* int CPU_freq: CPU frequency
+* int MEM_freq: Memory frequency
+* Returns 0 if there is no error.
+*/
 int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file, 
 									FILE *output_file, 
 									int CPU_freq, 
@@ -90,6 +112,14 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 	return 0;
 }
 
+/* This function opens a file, applies a function to it, 
+* creates an updated file and replaces the original file by the updated file.
+* char *input_filename: name of the input file
+* int CPU_freq: CPU frequency
+* int MEM_freq: Memory frequency
+* int (*fct)(FILE*, FILE*, int, int): function applied to the input file.
+* Returns 0 if there is no error.
+*/
 int operation(	char *input_filename, 
 				int CPU_freq, 
 				int MEM_freq, 
@@ -132,6 +162,17 @@ int operation(	char *input_filename,
 	return 0;
 }
 
+/* This function retrieves CPU and memory frequencies of a CSV file.
+* This function considers:
+* - CPU and memory frequencies are in the filename
+* - CPU frequency is prior to the memory frequency in the filename
+* - CPU and memory frequencies are the only integers in the filename
+* - each part in the filename is separated by the character : "_".
+* char *filename: name of the input file (but not the whole path)
+* int *CPU_freq: address to store the retrieved CPU frequency
+* int *MEM_freq: address to store the retrieved memory frequency
+* Returns 0 if there is no error.
+*/
 int get_CPU_freq_and_MEM_freq(	char *filename, 
 								int *CPU_freq, 
 								int *MEM_freq) 
