@@ -136,13 +136,13 @@ int operation(	char *input_filename,
 	
 	// Handle opening errors
 	if (input_file == NULL) {
-		// Print an error message to the standard error stream if at least one file cannot be opened.
-		fprintf(stderr, "Unable to open input file!\n");
+		// Print an error message to the standard error stream if the input file cannot be opened.
+		fprintf(stderr, "fopen errorr: Unable to open input file!\n");
 		return EXIT_FAILURE;
 	}
 	if (output_file == NULL) {
-		// Print an error message to the standard error stream if at least one file cannot be opened.
-		fprintf(stderr, "Unable to open output file!\n");
+		// Print an error message to the standard error stream if the output file cannot be opened.
+		fprintf(stderr, "fopen errorr: Unable to open output file!\n");
 		return EXIT_FAILURE;
 	}
 	
@@ -155,12 +155,12 @@ int operation(	char *input_filename,
 
 	// Replace original file with temporary file
 	if (remove(input_filename) != 0) {
-		fprintf(stderr, "Could not remove original file\n");
+		fprintf(stderr, "remove error: Could not remove original file\n");
 		remove("tmp");
 		return EXIT_FAILURE;
 	}
 	if (rename("tmp", input_filename) != 0) {
-		fprintf(stderr, "Could not rename temporary file\n");
+		fprintf(stderr, "rename error: Could not rename temporary file\n");
 		return EXIT_FAILURE;
 	}
 
@@ -216,7 +216,7 @@ const char * separators = "_";
 				counter++;
 			}
 			else {
-				fprintf(stderr, "Too much integer values.\n");
+				fprintf(stderr, "strtol error: Too much integer values.\n");
         		return EXIT_FAILURE;
 			}
 			
@@ -237,7 +237,7 @@ int main()
 
 	d1 = opendir(path);
     if (!d1) {
-		fprintf(stderr, "Unable to open directory %s\n", path);
+		fprintf(stderr, "opendir error: Unable to open directory %s\n", path);
         return EXIT_FAILURE;
 	}
 	while ((dir1 = readdir(d1)) != NULL) {
@@ -249,7 +249,7 @@ int main()
 		printf("%s\n", dir1->d_name);
 		d2 = opendir(dirname);
 		if (!d2) {
-			fprintf(stderr, "Unable to open directory %s\n", dirname);
+			fprintf(stderr, "opendir error: Unable to open directory %s\n", dirname);
         	return EXIT_FAILURE;
 		}
 		while ((dir2 = readdir(d2)) != NULL) {
