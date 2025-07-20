@@ -87,8 +87,8 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 									int CPU_freq, 
 									int MEM_freq)
 {
-	// Line counter
-	int lc = 0;
+	// First line boolean
+	char first = 0;
 	// Buffer to store each line of the input file.
 	char line[MAX_LENGTH];
 	// Buffer to store the addition going to the output file.
@@ -101,11 +101,13 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 		// Remove the newline character.
 		line[strcspn(line, "\n")] = 0;
 		// Create the additional part
-		if (lc == 1)
+		if (!first) {
 			// Special case for the header
 			sprintf(addition, ",\"CPU freq\",\"Memory freq\"\n");
-		else
-			// CPU and memory frequencies
+			first++;
+		}
+		else {
+			// Adding CPU and memory frequencies otherwise
 			sprintf(addition, ",%d,%d\n", CPU_freq, MEM_freq);
 		// Concatenate the additional part to the input line.
 		strcat(line, addition);
