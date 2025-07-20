@@ -244,7 +244,11 @@ int main()
 		char dirname[MAX_LENGTH];
 		sprintf(dirname, "%s/%s", path, dir1->d_name);
 		stat(dirname, &filestat1);
-		if( !(S_ISDIR(filestat1.st_mode) && strcmp(dir1->d_name, ".") && strcmp(dir1->d_name, "..")) )
+		if( !(S_ISDIR(filestat1.st_mode) 
+			&& strcmp(dir1->d_name, ".") 
+			&& strcmp(dir1->d_name, "..")
+			&& strcmp(dir1->d_name, "projects")
+			&& strcmp(dir1->d_name, "backup")) )
 			continue;
 		printf("%s\n", dir1->d_name);
 		d2 = opendir(dirname);
