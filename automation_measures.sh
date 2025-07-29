@@ -35,7 +35,7 @@ if [ $ENERGY -ne 0 ]
 then
 	# Check if the file containing execution time exists
 	if ! [ -f results/time_measures/${PRGM/*\/}/${PRGM/*\/}_results.txt ]; then
-  		echo "exec_time,CPU_freq,MEM_freq" >> "results/time_measures/${PRGM/*\/}/${PRGM/*\/}_results.txt"
+  		echo "exec_time,CPU_freq,MEM_freq" >> "results/energy_measures/${PRGM/*\/}/${PRGM/*\/}_execution_time_results.txt"
 	fi
     	# Energy consumption measures
     	for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
@@ -49,7 +49,7 @@ then
         	# Space the measures
 	        sleep 1
 		# Write the duration
-		echo $DURATION,$fCPU,$fMEM >> "results/time_measures/${PRGM/*\/}/${PRGM/*\/}_results.txt"
+		echo $DURATION,$fCPU,$fMEM >> "results/energy_measures/${PRGM/*\/}/${PRGM/*\/}_execution_time_results.txt"
     	done
 else
 	    # Time measures
