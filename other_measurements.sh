@@ -29,7 +29,7 @@ do
 	# For each execution
 	for  ((i=0; i < $N; i++))
 	do
-		# Create "results" and "time_measures" directories if not exists and a directory for the task
+		# Create "results" and "other_measures" directories if not exists and a directory for the task
 		mkdir -p results/other_measures/${PRGM/*\/}/
 		# Program executed in isolation in core 3
 		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
