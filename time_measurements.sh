@@ -18,8 +18,8 @@ fi
 N=$1			#1st argument = number of executions
 fCPU=$2			#2nd argument = current CPU frequency
 fMEM=$3			#3rd argument = current memory frequency
-MEASURE_NAME=execution_time		#name of the measure (for instance: exec time, number of instructions)
-MEASURE=elapsed					#keyword to get the corresponding measure(s) with the perf command
+MEASURE_NAME=$4	#4th argument = name of the measure (for instance: exec time, number of instructions)
+MEASURE=$5		#5th argument = keyword to get the corresponding measure(s) with the perf command
 #MEASURE=-e task-clock  -e cycles -e instructions -e elapsed
 
 # 2 - Execution N times
