@@ -15,9 +15,9 @@ if [ "$#" -ne 3 ]; then
 fi
 
 # Parameters
-N=$1		#1st argument = number of executions
-fCPU=$2		#2nd argument = current CPU frequency
-fMEM=$3		#3rd argument = current memory frequency
+N=$1				#1st argument = number of executions
+fCPU=$2				#2nd argument = current CPU frequency
+fMEM=$3				#3rd argument = current memory frequency
 
 # 2 - Execution N times
 # For each task...
