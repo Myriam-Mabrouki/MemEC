@@ -21,7 +21,7 @@ MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=400                    # Step between two CPU frequencies tested
 fMEM=500                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
-ENERGY=1                    # 0 for time measurements, 1 for energy measurements
+ENERGY=1                    # 0 for energy measurements, other measurements otherwise
 
 # 3 - Initial configurations
 # Set the CPUFreq governor
@@ -31,7 +31,7 @@ cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 
 # 4 - Measurements
 # Choose between doing time or energy consumption measures
-if [ $ENERGY -ne 0 ]
+if [ $ENERGY -eq 0 ]
 then
 	# Check if the file containing execution time exists
 	if ! [ -f results/time_measures/${PRGM/*\/}/${PRGM/*\/}_results.txt ]; then
