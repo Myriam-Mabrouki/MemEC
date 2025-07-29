@@ -32,6 +32,6 @@ do
 		mkdir -p results/time_measures/${PRGM/*\/}
 		# Program executed in isolation in core 3
 		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
-		taskset -c 3 perf stat $PRGM  2>&1 | grep -e task-clock  -e cycles -e instructions -e elapsed  | awk {'print $1'} >> "results/time_measures/${PRGM/*\/}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
+		taskset -c 3 perf stat $PRGM  2>&1 | grep $MEASURE | awk {'print $1'} >> "results/time_measures/${PRGM/*\/}/${PRGM/*\/}_time_measure_fCPU_${fCPU}_fMEM_${fMEM}.txt"
 	done
 done
