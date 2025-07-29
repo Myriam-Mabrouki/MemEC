@@ -3,23 +3,27 @@ This repository contains **memory energy consumption experiments**.
 
 ## Table of contents
 
-1. [Files includes](#1-files-included)
-    1. [```make_executables.sh```](#11-make_executablessh)
-    2. [```time_measurements.sh```](#12-time_measurementssh)
-    3. [```energy_executions.sh```](#13-energy_executionssh)
-    4. [```automation_measures.sh```](#14-automation_measuressh)
-    5. [``csv_update.c```](#15-csv_updatec)
-    6. [```time_stats.c```](#16-time_statsc)
-2. [Preliminaries](#2-preliminaries)
-    1. [Internet connection](#21-internet-connection)
-    2. [Required tools](#22-required-tools)
-    3. [Required configuration](#23-required-configuration)
-3. [Experiments](#3-experiments)
-    1. [Hardware and software configurations](#31-hardware-and-software-configurations)
-    2. [Protocol](#32-experimental-protocol)
-        1. [General protocol](#321-general-protocol)
-        2. [Time measurements](#322-time-measurements)
-        3. [Energy measurements](#323-energy-measurements)
+- [MemEC](#memec)
+  - [Table of contents](#table-of-contents)
+  - [1. Files included](#1-files-included)
+    - [1.1. ```make_executables.sh```](#11-make_executablessh)
+    - [1.2. ```time_measurements.sh```](#12-time_measurementssh)
+    - [1.3. ```energy_executions.sh```](#13-energy_executionssh)
+    - [1.4. ```automation_measures.sh```](#14-automation_measuressh)
+    - [1.5. ```csv_update.c```](#15-csv_updatec)
+    - [1.6. ```time_stats.c```](#16-time_statsc)
+  - [2. Preliminaries](#2-preliminaries)
+    - [2.1. Internet connection](#21-internet-connection)
+    - [2.2. Required tools](#22-required-tools)
+    - [2.3. Required configuration](#23-required-configuration)
+      - [2.3.1 CPU isolation](#231-cpu-isolation)
+      - [2.3.2. Real-time system](#232-real-time-system)
+  - [3. Experiments](#3-experiments)
+    - [3.1. Hardware and software configurations](#31-hardware-and-software-configurations)
+    - [3.2. Experimental protocol](#32-experimental-protocol)
+      - [3.2.1 General protocol](#321-general-protocol)
+      - [3.2.2 Time measurements](#322-time-measurements)
+      - [3.2.3 Energy measurements](#323-energy-measurements)
 
 
 ## 1. Files included 
@@ -65,6 +69,8 @@ Otherwise, you can look for the installation process corresponding to the OS you
 
 ### 2.3. Required configuration
 
+#### 2.3.1 CPU isolation
+
 To perform measures in isolation, we set the parameter ```isolcpus``` in the  ```/boot/firmware/cmdline.txt``` (or ```/boot/cmdline.txt```) file.
 This feature allows you to isolate specific cores so that no process run on them unless you assign a process to an isolated core.
 
@@ -95,7 +101,7 @@ To simulate a real-time system, we use the ```PREEMPT_RT``` patch.
 For this experiment, we measure the energy consumption of a [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) with the power analyser [Otii Ace Pro](https://www.qoitech.com/otii-ace/).
 The [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) has a quad-core processor and a 1GB LPDDR2 SDRAM.
 The operating system used on the system on chip is a [Raspberry Pi OS](https://www.raspberrypi.com/software/), an operating system based [Debian GNU/Linux](https://www.debian.org/) version 12 (bookworm).
-The measures are performed on a single core (check [section 2.3.](#23-required-configuration)). 
+The measures are performed on a single core (check [section 2.3.1](#231-cpu-isolation)). 
 
 ### 3.2. Experimental protocol
 
