@@ -18,6 +18,8 @@ fi
 N=$1				#1st argument = number of executions
 fCPU=$2				#2nd argument = current CPU frequency
 fMEM=$3				#3rd argument = current memory frequency
+MEASURE=elapsed		#measure(s) (for instance: exec time, number of instructions)
+#MEASURE=-e task-clock  -e cycles -e instructions -e elapsed
 
 # 2 - Execution N times
 # For each task...
