@@ -83,6 +83,10 @@ sudo nano /boot/cmdline.txt
 sudo reboot
 ```
 
+#### 2.3.2. Real-time system
+
+To simulate a real-time system, we use the ```PREEMPT_RT``` patch.
+
 
 ## 3. Experiments
 
