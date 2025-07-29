@@ -22,6 +22,8 @@ STEP=400                    # Step between two CPU frequencies tested
 fMEM=500                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
 ENERGY=1                    # 0 for energy measurements, other measurements otherwise
+MEASURE_NAME=execution_time	# name of the measure in case of other measurements
+MEASURE=elapsed				# keyword for the other measure to use with the perf command
 
 # 3 - Initial configurations
 # Set the CPUFreq governor
@@ -60,7 +62,7 @@ else
         	# Space the measures
 	        sleep 1
 	        # Do the measures
-        	./time_measurements.sh $N $fCPU $fMEM
+        	./other_measurements.sh $N $fCPU $fMEM $MEASURE_NAME $MEASURE
 	        # Space the measures
         	sleep 1
 	    done
