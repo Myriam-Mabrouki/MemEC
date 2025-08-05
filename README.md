@@ -8,9 +8,9 @@ The internship is entitled: "Introduction of statistical models for energy in te
   - [Table of contents](#table-of-contents)
   - [1. Files included](#1-files-included)
     - [1.1. ```make_executables.sh```](#11-make_executablessh)
-    - [1.2. ```time_measurements.sh```](#12-time_measurementssh)
+    - [1.2. ```other_measurements.sh```](#12-other_measurementssh)
     - [1.3. ```energy_executions.sh```](#13-energy_executionssh)
-    - [1.4. ```automation_measures.sh```](#14-automation_measuressh)
+    - [1.4. ```automate_measures.sh```](#14-automate_measuressh)
     - [1.5. ```csv_update.c```](#15-csv_updatec)
     - [1.6. ```time_stats.c```](#16-time_statsc)
   - [2. Preliminaries](#2-preliminaries)
@@ -41,11 +41,11 @@ The internship is entitled: "Introduction of statistical models for energy in te
 
 ### 1.1. ```make_executables.sh```
 
-### 1.2. ```time_measurements.sh```
+### 1.2. ```other_measurements.sh```
 
 ### 1.3. ```energy_executions.sh```
 
-### 1.4. ```automation_measures.sh```
+### 1.4. ```automate_measures.sh```
 
 ### 1.5. ```csv_update.c```
 
@@ -138,7 +138,7 @@ and replace $X$ by the memory frequency you want.
 ```
 sudo reboot
 ```
-- **Step five :** Set the parameters in ```automation_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
+- **Step five :** Set the parameters in ```automate_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
 
 | Parameter       | Description                                                                     | Default value           |
 | --------------- | ------------------------------------------------------------------------------- | ----------------------- |
@@ -148,9 +148,9 @@ sudo reboot
 | $\text{STEP}$   | the step between two CPU frequencies tested                                     | $100$                   |
 | $\text{fMEM}$   | memory frequency set (in MHz)                                                   | $500$                   |
 | $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate   |
-| $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements)                    | $1$                     |
+| $\text{ENERGY}$ | boolean (0 for energy measurements, anything else otherwise)                    | $1$                     |
 
-- **Step six :** Launch the program ```automation_measures.sh``` with : 
+- **Step six :** Launch the program ```automate_measures.sh``` with : 
 ```
 sudo ./automation_measures.sh
 ```
