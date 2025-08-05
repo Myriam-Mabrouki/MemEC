@@ -1,5 +1,6 @@
 # MemEC
-This repository contains **memory energy consumption experiments**.
+This project is about **memory energy consumption experiments** intended for my final-year internship at INRIA Paris.
+The internship is entitled: "Introduction of statistical models for energy in temporal analyses".
 
 ## Table of contents
 
