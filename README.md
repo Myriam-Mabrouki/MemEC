@@ -30,9 +30,9 @@ The internship is entitled: "Introduction of statistical models for energy in te
 ## 1. Files included 
 
 - ```make_executables.sh``` : download and compile executables of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) 
-- ```time_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves data about them (total execution time, total CPU times, number of cycles and number of instructions)
+- ```other_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves requested data about them (total execution time, total CPU times, number of cycles, number of instructions...)
 - ```energy_executions.sh``` : execute one program $N$ times with the highest user priority
-- ```automation_measures.sh``` : automatise time and energy measures
+- ```automate_measures.sh``` : automate energy and other measures
 - ```csv_update.c``` : updates in CSV files obtained after energy measures
 - ```time_stats.c``` : statistics about programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2)
 - results: directory containing data files obtained
