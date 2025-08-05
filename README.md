@@ -145,7 +145,7 @@ sudo reboot
 | $\text{N}$      | number of executions                                                            | $500$                   |
 | $\text{MIN}$    | minimum CPU frequency tested (in MHz)                                           | $600$                   |
 | $\text{MAX}$    | maximum CPU frequency tested (in MHz)                                           | $1400$                  |
-| $\text{STEP}$   | the step between two CPU frequencies tested                                     | $400$                   |
+| $\text{STEP}$   | the step between two CPU frequencies tested                                     | $100$                   |
 | $\text{fMEM}$   | memory frequency set (in MHz)                                                   | $500$                   |
 | $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate   |
 | $\text{ENERGY}$ | boolean (0 for time measurements, 1 for energy measurements)                    | $1$                     |
