@@ -35,6 +35,9 @@ The internship is entitled: "Introduction of statistical models for energy in te
 - ```automation_measures.sh``` : automatise time and energy measures
 - ```csv_update.c``` : updates in CSV files obtained after energy measures
 - ```time_stats.c``` : statistics about programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2)
+- results: directory containing data files obtained
+- results/energy_measures: directory with CSV files containing power consumption 
+- results/other_measures: directory containing a directory per (here from [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2)) program containing data other than energy consumption.
 
 ### 1.1. ```make_executables.sh```
 
