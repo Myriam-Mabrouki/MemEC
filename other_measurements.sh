@@ -31,8 +31,7 @@ do
 	do
 		# Create "results" and "other_measures" directories if not exists and a directory for the task
 		mkdir -p results/other_measures/${MEASURE_NAME}/${PRGM/*\/}/
-		# Program executed in isolation in core 3
-		# Total CPU time, number of cycles, number of instructions and total elapsed time retrieved
+		# Requested data retrieved of a program executed in isolation at the highest priority
 		taskset -c 3 perf stat $PRGM  2>&1 | grep $MEASURE | awk {'print $1'} >> "results/other_measures/${MEASURE_NAME}/${PRGM/*\/}/${PRGM/*\/}_${MEASURE_NAME}_fCPU_${fCPU}_fMEM_${fMEM}.txt"
 	done
 done
