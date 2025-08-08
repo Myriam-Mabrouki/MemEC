@@ -54,7 +54,7 @@ then
 		echo $DURATION,$fCPU,$fMEM >> "results/energy_measures/${PRGM/*\/}/${PRGM/*\/}_execution_time_results.txt"
     	done
 else
-	    # Time measures
+	    # Other measures
 	    for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
 	    do
 	        # Set the frequency
