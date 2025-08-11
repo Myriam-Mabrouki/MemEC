@@ -65,7 +65,7 @@ set_blocking (int fd, int should_block)
 
 
 
-int main(int argc, const char** argv){
+int main(int argc, char** argv){
 
 	if (argc != 2)
 	{
@@ -85,8 +85,7 @@ int main(int argc, const char** argv){
         set_interface_attribs (fd, 115220, 0);  // set speed to 115,200 bps, 8n1 (no parity)
         set_blocking (fd, 0);                // set no blocking
 
-	printf("%ld\n", sizeof(argv[1])/sizeof(char));
-        write (fd, argv[1], sizeof(argv[1])/sizeof(char));           // send 7 character greeting
+        write (fd, argv[1], strlen(argv[1]));           // send 7 character greeting
 
         //usleep ((7 + 25) * 100);             // sleep enough to transmit the 7 plus
                                              // receive 25:  approx 100 uS per char transmit
