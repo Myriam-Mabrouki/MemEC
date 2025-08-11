@@ -70,7 +70,7 @@ int main(int argc, const char** argv){
 	if (argc != 2)
 	{
 		perror ("Illegal number of arguments");
-		return;
+		return -1;
 	}
 
         char *portname = "/dev/ttyAMA0";
@@ -79,7 +79,7 @@ int main(int argc, const char** argv){
         if (fd < 0)
         {
                 perror ("error opening portname");
-                return;
+                return -2;
         }
 
         set_interface_attribs (fd, 115220, 0);  // set speed to 115,200 bps, 8n1 (no parity)
