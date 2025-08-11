@@ -21,7 +21,7 @@ MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=100                    # Step between two CPU frequencies tested
 fMEM=200                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
-ENERGY=1                    # 0 for energy measurements, other measurements otherwise
+ENERGY=0                    # 0 for energy measurements, other measurements otherwise
 MEASURE_NAME=execution_time	# name of the measure in case of other measurements
 MEASURE=elapsed				# keyword for the other measure to use with the perf command
 
@@ -45,7 +45,7 @@ then
 		# UART Communication: beginning of the measures
 		./uart start
         	# Do the measures
-	       ./energy_measurements.sh $N $PRGM
+		./energy_measurements.sh $N $PRGM
 		# UART Communication: beginning of the measures
 		./uart stop
         	# Space the measures
