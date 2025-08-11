@@ -1,17 +1,25 @@
-#include <stdlib.h>
+#define _GNU_SOURCE
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <termios.h>
-#include <unistd.h>
-#include <errno.h>
+#include <time.h>
+#include <sched.h>
+#include <assert.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+
 
 int set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
         if (tcgetattr (fd, &tty) != 0)
         {
-                perror ("error from tcgetattr");
+                fprintf(stderr, "error %d from tcgetattr\n", errno);
                 return -1;
         }
 
@@ -39,28 +47,26 @@ int set_interface_attribs (int fd, int speed, int parity)
 
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
         {
-                perror ("error from tcsetattr");
+                fprintf(stderr, "error %d from tcsetattr\n", errno);
                 return -1;
         }
         return 0;
 }
 
-void
-set_blocking (int fd, int should_block)
+void set_blocking (int fd, int should_block)
 {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
-        if (tcgetattr (fd, &tty) != 0)
-        {
-                perror ("error from tggetattr");
+        if (tcgetattr (fd, &tty) != 0) {
+                fprintf(stderr, "error %d from tggetattr\n", errno);
                 return;
         }
 
         tty.c_cc[VMIN]  = should_block ? 1 : 0;
         tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
 
-        if (tcsetattr (fd, TCSANOW, &tty) != 0)
-                perror ("error setting term attributes");
+        /* if (tcsetattr (fd, TCSANOW, &tty) != 0)
+                perror ("error %d setting term attributes", errno); */
 }
 
 
@@ -78,16 +84,20 @@ int main(int argc, char** argv){
         int fd = open (portname, O_RDWR | O_NOCTTY | O_SYNC);
         if (fd < 0)
         {
-                perror ("error opening portname");
+                fprintf (stderr, "error %d opening %s: %s\n", errno, portname, strerror (errno));
                 return -2;
         }
 
         set_interface_attribs (fd, 115220, 0);  // set speed to 115,200 bps, 8n1 (no parity)
         set_blocking (fd, 0);                // set no blocking
 
-        write (fd, argv[1], strlen(argv[1]));           // send 7 character greeting
+        if (atoi(argv[1]) == 0)        
+                write (fd, "start\n", 7);
+        else
+                write (fd, "stop\n", 6);              
 
-        //usleep ((7 + 25) * 100);             // sleep enough to transmit the 7 plus
+        //usleep ((size + 25) * 100);             // sleep enough to transmit the 7 plus
                                              // receive 25:  approx 100 uS per char transmit
+
         return 0;
 }
