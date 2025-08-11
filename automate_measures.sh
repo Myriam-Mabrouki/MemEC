@@ -19,7 +19,7 @@ N=1000			            # Number of executions
 MIN=600                     # Minimum CPU frequency tested (in MHz)
 MAX=1400                    # Maximum CPU frequency tested (in MHz)
 STEP=100                    # Step between two CPU frequencies tested
-fMEM=500                    # Memory frequency in MHz
+fMEM=200                    # Memory frequency in MHz
 PRGM=executables/statemate  # Name of the chosen program
 ENERGY=1                    # 0 for energy measurements, other measurements otherwise
 MEASURE_NAME=execution_time	# name of the measure in case of other measurements
@@ -35,10 +35,6 @@ cpupower frequency-set --min $(($MIN*1000)) --max $(($MAX*1000))
 # Choose between doing time or energy consumption measures
 if [ $ENERGY -eq 0 ]
 then
-	# Check if the file containing execution time exists
-	if ! [ -f results/time_measures/${PRGM/*\/}/${PRGM/*\/}_results.txt ]; then
-  		echo "exec_time,CPU_freq,MEM_freq" >> "results/energy_measures/${PRGM/*\/}/${PRGM/*\/}_execution_time_results.txt"
-	fi
     	# Energy consumption measures
     	for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
     	do
@@ -47,14 +43,12 @@ then
         	# Space the measures
 	        sleep 1
         	# Do the measures
-	        DURATION=`perf stat ./energy_measurements.sh $N $PRGM 2>&1 | grep elapsed  | awk '{print $1}'`
+	       ./energy_measurements.sh $N $PRGM
         	# Space the measures
 	        sleep 1
-		# Write the duration
-		echo $DURATION,$fCPU,$fMEM >> "results/energy_measures/${PRGM/*\/}/${PRGM/*\/}_execution_time_results.txt"
     	done
 else
-	    # Other measures
+	    # Time measures
 	    for ((fCPU=$MIN; fCPU<=$MAX; fCPU=fCPU+$STEP))
 	    do
 	        # Set the frequency
