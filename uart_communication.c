@@ -1,10 +1,10 @@
-#include <fcntl.h> 
+#include <fcntl.h>
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
 #include <errno.h>
 
-set_interface_attribs (int fd, int speed, int parity)
+int set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
         if (tcgetattr (fd, &tty) != 0)
@@ -64,7 +64,7 @@ set_blocking (int fd, int should_block)
 
 
 int main(int argc, const char** argv){
-        
+
 	if (argc != 2)
 	{
 		perror ("Illegal number of arguments");
@@ -79,7 +79,7 @@ int main(int argc, const char** argv){
                 perror ("error %d opening %s: %s", errno, portname, strerror (errno));
                 return;
         }
-        
+
         set_interface_attribs (fd, 115220, 0);  // set speed to 115,200 bps, 8n1 (no parity)
         set_blocking (fd, 0);                // set no blocking
 
