@@ -11,7 +11,7 @@ int set_interface_attribs (int fd, int speed, int parity)
         struct termios tty;
         if (tcgetattr (fd, &tty) != 0)
         {
-                perror ("error %d from tcgetattr", errno);
+                perror ("error from tcgetattr");
                 return -1;
         }
 
@@ -39,7 +39,7 @@ int set_interface_attribs (int fd, int speed, int parity)
 
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
         {
-                perror ("error %d from tcsetattr", errno);
+                perror ("error from tcsetattr");
                 return -1;
         }
         return 0;
@@ -52,7 +52,7 @@ set_blocking (int fd, int should_block)
         memset (&tty, 0, sizeof tty);
         if (tcgetattr (fd, &tty) != 0)
         {
-                perror ("error %d from tggetattr", errno);
+                perror ("error from tggetattr");
                 return;
         }
 
@@ -60,7 +60,7 @@ set_blocking (int fd, int should_block)
         tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
 
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
-                perror ("error %d setting term attributes", errno);
+                perror ("error setting term attributes");
 }
 
 
@@ -78,7 +78,7 @@ int main(int argc, const char** argv){
         int fd = open (portname, O_RDWR | O_NOCTTY | O_SYNC);
         if (fd < 0)
         {
-                perror ("error %d opening %s: %s", errno, portname, strerror (errno));
+                perror ("error opening portname");
                 return;
         }
 
