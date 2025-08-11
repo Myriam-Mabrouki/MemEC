@@ -42,8 +42,12 @@ then
 	        cpupower frequency-set --freq $(($fCPU*1000))
         	# Space the measures
 	        sleep 1
+		# UART Communication: beginning of the measures
+		./uart start
         	# Do the measures
 	       ./energy_measurements.sh $N $PRGM
+		# UART Communication: beginning of the measures
+		./uart stop
         	# Space the measures
 	        sleep 1
     	done
