@@ -57,7 +57,8 @@ void set_blocking (int fd, int should_block)
 {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
-        if (tcgetattr (fd, &tty) != 0) {
+        if (tcgetattr (fd, &tty) != 0)
+        {
                 fprintf(stderr, "error %d from tggetattr\n", errno);
                 return;
         }
@@ -65,8 +66,8 @@ void set_blocking (int fd, int should_block)
         tty.c_cc[VMIN]  = should_block ? 1 : 0;
         tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
 
-        /* if (tcsetattr (fd, TCSANOW, &tty) != 0)
-                perror ("error %d setting term attributes", errno); */
+        if (tcsetattr (fd, TCSANOW, &tty) != 0)
+                fprintf(stderr, "error setting term attributes");
 }
 
 
@@ -94,10 +95,7 @@ int main(int argc, char** argv){
         if (atoi(argv[1]) == 0)        
                 write (fd, "start\n", 7);
         else
-                write (fd, "stop\n", 6);              
-
-        //usleep ((size + 25) * 100);             // sleep enough to transmit the 7 plus
-                                             // receive 25:  approx 100 uS per char transmit
+                write (fd, "stop\n", 6);
 
         return 0;
 }
