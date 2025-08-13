@@ -7,12 +7,13 @@ The internship is entitled: "Introduction of statistical models for energy in te
 - [MemEC](#memec)
   - [Table of contents](#table-of-contents)
   - [1. Files included](#1-files-included)
-    - [1.1. ```make_executables.sh```](#11-make_executablessh)
-    - [1.2. ```other_measurements.sh```](#12-other_measurementssh)
-    - [1.3. ```energy_executions.sh```](#13-energy_executionssh)
-    - [1.4. ```automate_measures.sh```](#14-automate_measuressh)
-    - [1.5. ```csv_update.c```](#15-csv_updatec)
-    - [1.6. ```time_stats.c```](#16-time_statsc)
+    - [1.1. uick presentation of all files](#11-uick-presentation-of-all-files)
+    - [1.2. ```make_executables.sh```](#12-make_executablessh)
+    - [1.3. ```other_measurements.sh```](#13-other_measurementssh)
+    - [1.4. ```energy_executions.sh```](#14-energy_executionssh)
+    - [1.5. ```automate_measures.sh```](#15-automate_measuressh)
+    - [1.6. ```csv_update.c```](#16-csv_updatec)
+    - [1.7. ```time_stats.c```](#17-time_statsc)
   - [2. Preliminaries](#2-preliminaries)
     - [2.1. Internet connection](#21-internet-connection)
     - [2.2. Required tools](#22-required-tools)
@@ -29,6 +30,8 @@ The internship is entitled: "Introduction of statistical models for energy in te
 
 ## 1. Files included 
 
+### 1.1. uick presentation of all files
+
 - ```make_executables.sh``` : download and compile executables of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) 
 - ```other_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves requested data about them (total execution time, total CPU times, number of cycles, number of instructions...)
 - ```energy_executions.sh``` : execute one program $N$ times with the highest user priority
@@ -39,17 +42,17 @@ The internship is entitled: "Introduction of statistical models for energy in te
 - results/energy_measures: directory with CSV files containing power consumption
 - results/other_measures: directory containing a directory per (here from [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2)) program containing data other than energy consumption
 
-### 1.1. ```make_executables.sh```
+### 1.2. ```make_executables.sh```
 
-### 1.2. ```other_measurements.sh```
+### 1.3. ```other_measurements.sh```
 
-### 1.3. ```energy_executions.sh```
+### 1.4. ```energy_executions.sh```
 
-### 1.4. ```automate_measures.sh```
+### 1.5. ```automate_measures.sh```
 
-### 1.5. ```csv_update.c```
+### 1.6. ```csv_update.c```
 
-### 1.6. ```time_stats.c```
+### 1.7. ```time_stats.c```
 
 ## 2. Preliminaries
 
