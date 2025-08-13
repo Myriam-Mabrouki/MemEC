@@ -2,6 +2,9 @@
 
 # Author: Myriam Mabrouki
 
+# This file enables patches the PREEMPT-RT patch to your device.
+# Feel free to change versions.
+
 VERSION=v6.x
 RT_VERSION=6.9
 LINUX_VERSION=linux-6.9.9
