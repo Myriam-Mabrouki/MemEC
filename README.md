@@ -107,8 +107,13 @@ To simulate a real-time system, we use the ```PREEMPT_RT``` patch.
 ```shell
 make menuconfig
 ```
-Within the menu navigate to General Setup/Preemption Model and choose Fully Preemptible Kernel.
+Within the menu navigate to General Setup/Preemption Model and choose Fully Preemptible Kernel. 
 
+ Alternately, make the following change to the Linux configuration (.config file ?):
+```
+-CONFIG_PREEMPT=y
++CONFIG_PREEMPT_RT_FULL=y
+```
 
 Finally, build the kernel.
 ```shell
