@@ -100,6 +100,25 @@ sudo reboot
 
 To simulate a real-time system, we use the ```PREEMPT_RT``` patch.
 
+```shell
+./preempt_rt.sh
+```
+
+```shell
+make menuconfig
+```
+Within the menu navigate to General Setup/Preemption Model and choose Fully Preemptible Kernel.
+
+
+Finally, build the kernel.
+```shell
+make
+```
+
+You can now restart your device for changes to take effect.
+```shell
+sudo reboot
+```
 
 ## 3. Experiments
 
