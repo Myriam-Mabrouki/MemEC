@@ -2,6 +2,8 @@
 
 # Author: Myriam Mabrouki
 
+VERSION=v6.x
+RT_VERSION=6.9
 LINUX_VERSION=linux-6.9.9
 PATCH_VERSION=patch-6.9-rt5
 
