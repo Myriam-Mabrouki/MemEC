@@ -68,8 +68,8 @@ Before starting the experiments, make you sure you have these tools install :
 - cpupower
 
 If you do not have these tools installed and you have the same software configurations ([Raspberry Pi OS](https://www.raspberrypi.com/software/) or [Debian GNU/Linux](https://www.debian.org/)), you can follow next steps : 
-```
-sudo apt install linux-perf
+```shell
+sudo apt install linux-perf -y
 sudo apt install linux-cpupower -y
 ```
 Otherwise, you can look for the installation process corresponding to the OS you are using.
@@ -83,16 +83,16 @@ This feature allows you to isolate specific cores so that no process run on them
 
 The following steps show how to isolate all the cores except the core 0 : 
 - find the file to edit : 
-```
+```shell
 sudo nano /boot/firmware/cmdline.txt
 ``` 
 or 
-```
+```shell
 sudo nano /boot/cmdline.txt
 ``` 
 - edit the file by adding at the end of the line : ``` isolcpus=1-3```
 - restart your device to take effect : 
-```
+```shell
 sudo reboot
 ```
 
@@ -140,7 +140,7 @@ sdram_freq_min=X
 ```
 and replace $X$ by the memory frequency you want.
 - **Step four :** Reboot your device so the memory frequency change could take effect.
-```
+```shell
 sudo reboot
 ```
 - **Step five :** Set the parameters in ```automate_measures.sh```. You have to modify the file directly in order to avoid useless I/O. The parameters are the following :
@@ -156,7 +156,7 @@ sudo reboot
 | $\text{ENERGY}$ | boolean (0 for energy measurements, anything else otherwise)                    | $1$                     |
 
 - **Step six :** Launch the program ```automate_measures.sh``` with : 
-```
+```shell
 sudo ./automation_measures.sh
 ```
 - **Step seven :** If you want to test with other memory frequencies, go back to **Step three**. In our case, we test the following memory frequencies : $500$ MHz, $400$ MHz, $300$ MHz, $200$ MHz.
