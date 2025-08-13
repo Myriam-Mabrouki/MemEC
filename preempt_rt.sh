@@ -6,9 +6,9 @@
 # Feel free to change versions.
 
 VERSION=v6.x
-RT_VERSION=6.9
-LINUX_VERSION=linux-6.9.9
-PATCH_VERSION=patch-6.9-rt5
+RT_VERSION=6.12
+LINUX_VERSION=linux-6.12.39
+PATCH_VERSION=patch-6.12.39-rt11
 
 cd
 sudo apt install build-essential bc kmod cpio flex cpio libncurses5-dev bison libssl-dev wget
