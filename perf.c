@@ -6,12 +6,12 @@
 #include <sys/syscall.h> /* Definition of SYS_* constants */
 #include <unistd.h>
 #include <inttypes.h>
-#define TOTAL_EVENTS 6
+#define TOTAL_EVENTS 2
 
 // The function to counting through (called in main)
 void code_to_measure(){
     int sum = 0;
-    for(int i = 0; i < 1000000000; ++i){
+    for(int i = 0; i < 2; ++i){
         sum += 1;
     }
 }
@@ -62,10 +62,10 @@ int main() {
     // Configure the group of PMUs to count
     configure_event(&pe[0], PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES);
     configure_event(&pe[1], PERF_TYPE_HARDWARE, PERF_COUNT_HW_INSTRUCTIONS);
-    configure_event(&pe[2], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_FRONTEND);
-    configure_event(&pe[3], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_BACKEND);
-    configure_event(&pe[4], PERF_TYPE_RAW, 0x70);  // Count of speculative loads (see Arm PMU docs)
-    configure_event(&pe[5], PERF_TYPE_RAW, 0x71);  // Count of speculative stores (see Arm PMU docs)
+    //configure_event(&pe[2], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_FRONTEND);
+    //configure_event(&pe[3], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_BACKEND);
+    //configure_event(&pe[4], PERF_TYPE_RAW, 0x70);  // Count of speculative loads (see Arm PMU docs)
+    //configure_event(&pe[5], PERF_TYPE_RAW, 0x71);  // Count of speculative stores (see Arm PMU docs)
 
     // Create event group leader
     fd[0] = perf_event_open(&pe[0], 0, -1, -1, 0);
@@ -75,7 +75,6 @@ int main() {
         fd[i] = perf_event_open(&pe[i], 0, -1, fd[0], 0);
         ioctl(fd[i], PERF_EVENT_IOC_ID, &id[i]);
     }
-
     // Reset counters and start counting; Since fd[0] is leader, this resets and enables all counters
     // PERF_IOC_FLAG_GROUP required for the ioctl to act on the group of file descriptors
     ioctl(fd[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
