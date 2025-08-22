@@ -6,7 +6,7 @@
 #include <sys/syscall.h> /* Definition of SYS_* constants */
 #include <unistd.h>
 #include <inttypes.h>
-#define TOTAL_EVENTS 6
+#define TOTAL_EVENTS 2
 
 // The function to counting through (called in main)
 void code_to_measure(){
