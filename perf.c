@@ -56,23 +56,28 @@ int main() {
     int fd[TOTAL_EVENTS];  // fd[0] will be the group leader file descriptor
     int id[TOTAL_EVENTS];  // event ids for file descriptors
     uint64_t pe_val[TOTAL_EVENTS]; // Counter value array corresponding to fd/id array.
-    struct perf_event_attr pe[TOTAL_EVENTS];  // Configuration structure for perf events (see man perf_event_open)
+    struct perf_event_attr pe0, pe1, pe2, pe3, pe4, pe5;  // Configuration structure for perf events (see man perf_event_open)
     struct read_format counter_results;
 
     // Configure the group of PMUs to count
-    configure_event(&pe[0], PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES);
-    configure_event(&pe[1], PERF_TYPE_HARDWARE, PERF_COUNT_HW_INSTRUCTIONS);
-    //configure_event(&pe[2], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_FRONTEND);
-    //configure_event(&pe[3], PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_BACKEND);
-    //configure_event(&pe[4], PERF_TYPE_RAW, 0x70);  // Count of speculative loads (see Arm PMU docs)
-    //configure_event(&pe[5], PERF_TYPE_RAW, 0x71);  // Count of speculative stores (see Arm PMU docs)
+    configure_event(&pe0, PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES);
+    configure_event(&pe1, PERF_TYPE_HARDWARE, PERF_COUNT_HW_INSTRUCTIONS);
+    //configure_event(&pe2, PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_FRONTEND);
+    //configure_event(&pe3, PERF_TYPE_HARDWARE, PERF_COUNT_HW_STALLED_CYCLES_BACKEND);
+    //configure_event(&pe4, PERF_TYPE_RAW, 0x70);  // Count of speculative loads (see Arm PMU docs)
+    //configure_event(&pe5, PERF_TYPE_RAW, 0x71);  // Count of speculative stores (see Arm PMU docs)
 
     // Create event group leader
-    fd[0] = perf_event_open(&pe[0], 0, -1, -1, 0);
+    fd[0] = perf_event_open(&pe0, 0, -1, -1, 0);
     ioctl(fd[0], PERF_EVENT_IOC_ID, &id[0]);
     // Let's create the rest of the events while using fd[0] as the group leader
+    fd[0] = perf_event_open(&pe0, 0, -1, fd[0], 0);
+    fd[1] = perf_event_open(&pe1, 0, -1, fd[0], 0);
+    //fd[2] = perf_event_open(&pe2, 0, -1, fd[0], 0);
+    //fd[3] = perf_event_open(&pe3, 0, -1, fd[0], 0);
+    //fd[4] = perf_event_open(&pe4, 0, -1, fd[0], 0);
+    //fd[5] = perf_event_open(&pe5, 0, -1, fd[0], 0);
     for(int i = 1; i < TOTAL_EVENTS; i++){
-        fd[i] = perf_event_open(&pe[i], 0, -1, fd[0], 0);
         ioctl(fd[i], PERF_EVENT_IOC_ID, &id[i]);
     }
     // Reset counters and start counting; Since fd[0] is leader, this resets and enables all counters
@@ -98,10 +103,10 @@ int main() {
     }
     printf("CPU cycles: %"PRIu64"\n", pe_val[0]);
     printf("Instructions retired: %"PRIu64"\n", pe_val[1]);
-    printf("Frontend stall cycles: %"PRIu64"\n", pe_val[2]);
-    printf("Backend stall cycles: %"PRIu64"\n", pe_val[3]);
-    printf("Loads executed speculatively: %"PRIu64"\n", pe_val[4]);
-    printf("Stores executed speculatively: %"PRIu64"\n", pe_val[5]);
+    //printf("Frontend stall cycles: %"PRIu64"\n", pe_val[2]);
+    //printf("Backend stall cycles: %"PRIu64"\n", pe_val[3]);
+    //printf("Loads executed speculatively: %"PRIu64"\n", pe_val[4]);
+    //printf("Stores executed speculatively: %"PRIu64"\n", pe_val[5]);
 
     // Close counter file descriptors
     for(int i = 0; i < TOTAL_EVENTS; i++){
