@@ -11,7 +11,7 @@
 // The function to counting through (called in main)
 void code_to_measure(){
   int sum = 0;
-  for(int i = 0; i < 1000000000; ++i){
+  for(int i = 0; i < 100; ++i){
     sum += 1;
   }
 }
