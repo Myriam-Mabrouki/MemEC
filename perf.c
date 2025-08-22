@@ -71,7 +71,6 @@ int main() {
     fd[0] = perf_event_open(&pe0, 0, -1, -1, 0);
     ioctl(fd[0], PERF_EVENT_IOC_ID, &id[0]);
     // Let's create the rest of the events while using fd[0] as the group leader
-    fd[0] = perf_event_open(&pe0, 0, -1, fd[0], 0);
     fd[1] = perf_event_open(&pe1, 0, -1, fd[0], 0);
     //fd[2] = perf_event_open(&pe2, 0, -1, fd[0], 0);
     //fd[3] = perf_event_open(&pe3, 0, -1, fd[0], 0);
