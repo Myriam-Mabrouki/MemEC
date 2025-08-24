@@ -7,7 +7,7 @@ The internship is entitled: "Introduction of statistical models for energy in te
 - [MemEC](#memec)
   - [Table of contents](#table-of-contents)
   - [1. Files included](#1-files-included)
-    - [1.1. uick presentation of all files](#11-uick-presentation-of-all-files)
+    - [1.1. Quick presentation of all files](#11-quick-presentation-of-all-files)
     - [1.2. ```make_executables.sh```](#12-make_executablessh)
     - [1.3. ```other_measurements.sh```](#13-other_measurementssh)
     - [1.4. ```energy_executions.sh```](#14-energy_executionssh)
@@ -30,7 +30,7 @@ The internship is entitled: "Introduction of statistical models for energy in te
 
 ## 1. Files included 
 
-### 1.1. uick presentation of all files
+### 1.1. Quick presentation of all files
 
 - ```make_executables.sh``` : download and compile executables of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) 
 - ```other_measurements.sh```: execute programs of [TACLeBench](http://dx.doi.org/10.4230/OASIcs.WCET.2016.2) in isolation $N$ times with the highest user priority and retrieves requested data about them (total execution time, total CPU times, number of cycles, number of instructions...)
@@ -171,12 +171,12 @@ sudo reboot
 
 | Parameter       | Description                                                                     | Default value           |
 | --------------- | ------------------------------------------------------------------------------- | ----------------------- |
-| $\text{N}$      | number of executions                                                            | $500$                   |
+| $\text{N}$      | number of executions                                                            | $1000$                  |
 | $\text{MIN}$    | minimum CPU frequency tested (in MHz)                                           | $600$                   |
 | $\text{MAX}$    | maximum CPU frequency tested (in MHz)                                           | $1400$                  |
 | $\text{STEP}$   | the step between two CPU frequencies tested                                     | $100$                   |
 | $\text{fMEM}$   | memory frequency set (in MHz)                                                   | $500$                   |
-| $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/statemate   |
+| $\text{PRGM}$   | name of the chosen program (in case of energy measures)                         | executables/ndes        |
 | $\text{ENERGY}$ | boolean (0 for energy measurements, anything else otherwise)                    | $1$                     |
 
 - **Step six :** Launch the program ```automate_measures.sh``` with : 
