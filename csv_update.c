@@ -197,21 +197,24 @@ int add_CPU_freq_MEM_freq_in_csv(	FILE *input_file,
 }
 
 /* This function opens a file, applies a function to it, 
-* creates an updated file and replaces the original file by the updated file.
+* creates an updated file. 
+* If requested, it replaces the original file by the updated file.
 * char *input_filename: name of the input file
 * int CPU_freq: CPU frequency
 * int MEM_freq: Memory frequency
 * int (*fct)(FILE*, FILE*, int, int): function applied to the input file.
 * Returns 0 if there is no error.
 */
-int operation(	char *input_filename, 
+int operation(	char *input_filename,
+				char *output_filename, 
 				int CPU_freq, 
 				int MEM_freq, 
-				int (*fct)(FILE*, FILE*, int, int))
+				int (*fct)(FILE*, FILE*, int, int),
+				int replace)
 {
 	// Open files
 	FILE* input_file = fopen(input_filename, "r");
-	FILE* output_file = fopen("tmp", "w");
+	FILE* output_file = fopen(output_filename, "w");
 	
 	// Handle opening errors
 	if (input_file == NULL) {
@@ -232,15 +235,17 @@ int operation(	char *input_filename,
 	fclose(input_file);
 	fclose(output_file);
 
-	// Replace the original file with the temporary file
-	if (remove(input_filename) != 0) {
-		fprintf(stderr, "remove error: Could not remove original file\n");
-		remove("tmp");
-		return EXIT_FAILURE;
-	}
-	if (rename("tmp", input_filename) != 0) {
-		fprintf(stderr, "rename error: Could not rename temporary file\n");
-		return EXIT_FAILURE;
+	// Replace the original file with the temporary file if requested
+	if (replace != 0) {
+		if (remove(input_filename) != 0) {
+			fprintf(stderr, "remove error: Could not remove original file\n");
+			remove("tmp");
+			return EXIT_FAILURE;
+		}
+		if (rename(output_filename, input_filename) != 0) {
+			fprintf(stderr, "rename error: Could not rename temporary file\n");
+			return EXIT_FAILURE;
+		}
 	}
 
 	return 0;
