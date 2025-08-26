@@ -18,6 +18,20 @@
 #define NB_EXEC 1000
 
 
+float mean(float* array, int array_size)
+{
+	float mean = 0;
+	
+	for (int i = 0; i < array_size; i++) {
+		mean += array[i];
+	}
+
+	mean /= array_size;
+
+	return mean;
+}
+
+
 /* This function updates the CSV by making the first timestamp start at 0 
 * and adjusting other time values accordingly.
 * This function considers there is a header in the CSV file.
