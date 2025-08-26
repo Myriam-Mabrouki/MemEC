@@ -49,6 +49,53 @@ int line_counter(FILE *input_file)
 }
 
 
+int put_avg_power(	FILE *input_file, 
+					FILE *output_file, 
+					int CPU_freq, 
+					int MEM_freq)
+{
+    float avg_power;
+    char str_res[MAX_LENGTH];
+    int nb_measures_per_exec = line_counter(input_file) / NB_EXEC;
+    
+    if (fseek(input_file, 0, SEEK_SET) != 0) {
+        fprintf(stderr, "fseek error: Unable to update position in the input file!\n");
+        fclose(input_file);
+        return EXIT_FAILURE;
+    }
+	
+	char line[MAX_LENGTH];
+
+    // Variable to store timestamp and power values.
+	float timestamp, value;
+
+    // Rewrite the header
+    fgets(line, sizeof(line), input_file);
+    fputs(line, output_file);
+
+    for (int i = 0; i < NB_EXEC; i++){
+        float* array = (float *)malloc(NB_EXEC * sizeof(float));
+        for (int j = 0; j < nb_measures_per_exec; j++) {
+            // Read a line from the input file
+            fgets(line, sizeof(line), input_file);
+
+            // Retrieve time and power values.
+            char tmp[MAX_LENGTH];
+            strcpy(tmp, line);
+            timestamp = atof(strtok(tmp, ","));
+            value = atof(strtok(NULL, ","));
+
+            array[j] = value;
+        }
+        avg_power = mean(array, nb_measures_per_exec);
+        sprintf(str_res, "%f,%f,%d,%d\n", timestamp, avg_power, CPU_freq, MEM_freq);
+        fputs(str_res, output_file);
+        free(array);
+    }
+    return 0;
+}
+
+
 /* This function updates the CSV by making the first timestamp start at 0 
 * and adjusting other time values accordingly.
 * This function considers there is a header in the CSV file.
