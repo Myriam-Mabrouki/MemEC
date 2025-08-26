@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 #define MAX_LENGTH 1024
+#define NB_EXEC 1000
 
 
 /* This function updates the CSV by making the first timestamp start at 0 
