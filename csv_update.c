@@ -32,6 +32,23 @@ float mean(float* array, int array_size)
 }
 
 
+int line_counter(FILE *input_file)
+{
+    //Line counter
+    int nb_lines = 0;
+	// Buffer to store each line of the input file.
+	char line[MAX_LENGTH];
+
+	// Read each line from the input file and store it in the 'line' buffer.
+	while (fgets(line, sizeof(line), input_file)) {
+		nb_lines++;
+	}
+	
+    //We do not count the header
+	return nb_lines - 1; 
+}
+
+
 /* This function updates the CSV by making the first timestamp start at 0 
 * and adjusting other time values accordingly.
 * This function considers there is a header in the CSV file.
