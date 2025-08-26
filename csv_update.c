@@ -264,7 +264,8 @@ int get_CPU_freq_and_MEM_freq(	char *filename,
 	long int val;
 	char *endptr;
 	const char * separators = "_";
-	char * strToken = strtok (filename, separators);
+	char * filename_copy = strdup(filename);
+	char * strToken = strtok (filename_copy, separators);
 	// Integer counter in the filename
 	int counter = 0;
 
