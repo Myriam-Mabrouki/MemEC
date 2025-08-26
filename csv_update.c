@@ -319,7 +319,7 @@ int main()
 {
 	DIR *d1, *d2;
     struct dirent *dir1, *dir2;
-    struct stat filestat1, filestat2;
+    struct stat filestat1, filestat2, dirstat1, dirstat2;
 	int CPU_freq, MEM_freq;
 	// Path where the energy measures are located
 	char path[64] = "results/energy_measures";
@@ -331,6 +331,12 @@ int main()
         return EXIT_FAILURE;
 	}
 
+	char dirname_avg_power1[MAX_LENGTH];
+	sprintf(dirname_avg_power1, "%s/%s", path, "avg_power_per_execution");
+	if (stat(dirname_avg_power1, &dirstat1) == -1) {
+		mkdir(dirname_avg_power1, 0700);
+	}
+
 	// Check if it is a directory corresponding to one program.
 	while ((dir1 = readdir(d1)) != NULL) {
 		char dirname[MAX_LENGTH];
@@ -339,10 +345,17 @@ int main()
 		if( !(S_ISDIR(filestat1.st_mode) 
 			&& strcmp(dir1->d_name, ".") 
 			&& strcmp(dir1->d_name, "..")
-			&& strcmp(dir1->d_name, "projects")
+			&& strcmp(dir1->d_name, "avg_power_per_execution")
 			&& strcmp(dir1->d_name, "backup")) )
 			continue;
 		printf("%s\n", dir1->d_name);
+
+
+		char dirname_avg_power2[MAX_LENGTH];
+		sprintf(dirname_avg_power2, "%s/%s/%s", path, "avg_power_per_execution", dir1->d_name);
+		if (stat(dirname_avg_power2, &dirstat2) == -1) {
+			mkdir(dirname_avg_power2, 0700);
+		}
 
 		// Open the directory containing energy measures of one program.
 		d2 = opendir(dirname);
@@ -358,8 +371,11 @@ int main()
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
-				operation(input_filename, 0, 0, begin_at_0);
-				operation(input_filename, CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv);
+				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1);
+				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1);
+				char output_filename[MAX_LENGTH];
+				sprintf(output_filename, "%s/%s/%s/%s", path, "avg_power_per_execution", dir1->d_name, dir2->d_name);
+				operation(input_filename, output_filename, CPU_freq, MEM_freq, put_avg_power, 0);
 			}
 		}
 
