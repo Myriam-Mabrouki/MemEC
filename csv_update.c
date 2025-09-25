@@ -403,9 +403,10 @@ int main()
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
 				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1);
 				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1);
-				char output_filename[MAX_LENGTH];
-				sprintf(output_filename, "%s/%s/%s/%s", path, "avg_power_per_execution", dir1->d_name, dir2->d_name);
-				operation(input_filename, output_filename, CPU_freq, MEM_freq, put_avg_power, 0);
+				char output_filename1[MAX_LENGTH], output_filename2[MAX_LENGTH];
+				sprintf(output_filename1, "%s/%s/%s/%s", path, "avg_power_per_execution", dir1->d_name, dir2->d_name);
+				sprintf(output_filename2, "%s/avg/%s_avg", path, dir1->d_name);
+				operation(input_filename, output_filename1, CPU_freq, MEM_freq, put_avg_power, 0);
 			}
 		}
 
