@@ -95,6 +95,36 @@ int put_avg_power_per_exec(	FILE *input_file,
     return 0;
 }
 
+int put_avg_power(	FILE *input_file, 
+					FILE *output_file, 
+					int CPU_freq, 
+					int MEM_freq)
+{
+    float avg_power = 0, value;
+    char str_res[MAX_LENGTH];
+    int counter = 0;
+	int first_line = 1;
+    
+	char line[MAX_LENGTH];
+	while (fgets(line, sizeof(line), input_file)) {
+		if (first_line) {
+			first_line = 0;
+			continue;
+		}
+		char tmp[MAX_LENGTH];
+        strcpy(tmp, line);
+        strtok(tmp, ",");
+		avg_power += atof(strtok(NULL, ","));
+		counter++;
+	}
+
+	avg_power /= counter;
+	sprintf(str_res, "%f,%d,%d\n", avg_power, CPU_freq, MEM_freq);
+	fputs(str_res, output_file);
+
+    return 0;
+}
+
 
 /* This function updates the CSV by making the first timestamp start at 0 
 * and adjusting other time values accordingly.
