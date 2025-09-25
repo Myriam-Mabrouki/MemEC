@@ -49,10 +49,10 @@ int line_counter(FILE *input_file)
 }
 
 
-int put_avg_power(	FILE *input_file, 
-					FILE *output_file, 
-					int CPU_freq, 
-					int MEM_freq)
+int put_avg_power_per_exec(	FILE *input_file, 
+							FILE *output_file, 
+							int CPU_freq, 
+							int MEM_freq)
 {
     float avg_power;
     char str_res[MAX_LENGTH];
