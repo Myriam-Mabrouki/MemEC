@@ -240,11 +240,18 @@ int operation(	char *input_filename,
 				int CPU_freq, 
 				int MEM_freq, 
 				int (*fct)(FILE*, FILE*, int, int),
-				int replace)
+				int replace,
+				int append)
 {
 	// Open files
 	FILE* input_file = fopen(input_filename, "r");
-	FILE* output_file = fopen(output_filename, "w");
+	FILE* output_file;
+	if (append != 0) {
+		output_file = fopen(output_filename, "a");
+	}
+	else {
+		output_file = fopen(output_filename, "w");
+	}
 	
 	// Handle opening errors
 	if (input_file == NULL) {
@@ -393,6 +400,16 @@ int main()
 			fprintf(stderr, "opendir error: Unable to open directory %s\n", dirname);
         	return EXIT_FAILURE;
 		}
+		char  output_filename_dir[MAX_LENGTH];
+		sprintf(output_filename_dir, "%s/avg/%s_avg", path, dir1->d_name);
+		FILE* output_file = fopen(output_filename_dir, "w");
+		if (output_file == NULL) {
+			// Print an error message to the standard error stream if the output file cannot be opened.
+			fprintf(stderr, "fopen errorr: Unable to open output file!\n");
+			return EXIT_FAILURE;
+		}
+		fputs("\"Avg power\",\"CPU freq\",\"Memory freq\"",output_filename_dir);
+		fclose(output_file);
 
 		// For each CSV file: get frequencies and apply some operations.
 		while ((dir2 = readdir(d2)) != NULL) {
@@ -401,12 +418,12 @@ int main()
 			stat(input_filename, &filestat2);
 			if( !S_ISDIR(filestat2.st_mode) ) {
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
-				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1);
-				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1);
-				char output_filename1[MAX_LENGTH], output_filename2[MAX_LENGTH];
+				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1, 0);
+				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1, 0);
+				char output_filename1[MAX_LENGTH];
 				sprintf(output_filename1, "%s/%s/%s/%s", path, "avg_power_per_execution", dir1->d_name, dir2->d_name);
-				sprintf(output_filename2, "%s/avg/%s_avg", path, dir1->d_name);
-				operation(input_filename, output_filename1, CPU_freq, MEM_freq, put_avg_power, 0);
+				operation(input_filename, output_filename, CPU_freq, MEM_freq, put_avg_power_per_exec, 0, 0);
+				operation(input_filename, output_filename_dir, CPU_freq, MEM_freq, put_avg_power, 0, 1);
 			}
 		}
 
