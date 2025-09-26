@@ -100,7 +100,7 @@ int put_avg_power(	FILE *input_file,
 					int CPU_freq, 
 					int MEM_freq)
 {
-    float avg_power = 0, value;
+    float avg_power = 0;
     char str_res[MAX_LENGTH];
     int counter = 0;
 	int first_line = 1;
@@ -359,7 +359,7 @@ int main()
     struct stat filestat1, filestat2, dirstat1, dirstat2;
 	int CPU_freq, MEM_freq;
 	// Path where the energy measures are located
-	char path[64] = "results/energy_measures";
+	char path[64] = "results/power_measures";
 
 	// Open the directory containing energy measures of all programs.
 	d1 = opendir(path);
@@ -369,7 +369,7 @@ int main()
 	}
 
 	char dirname_avg_power1[MAX_LENGTH];
-	sprintf(dirname_avg_power1, "%s/%s", path, "avg_power_per_execution");
+	sprintf(dirname_avg_power1, "%s/avg_power_per_execution", path);
 	if (stat(dirname_avg_power1, &dirstat1) == -1) {
 		mkdir(dirname_avg_power1, 0700);
 	}
@@ -382,6 +382,7 @@ int main()
 		if( !(S_ISDIR(filestat1.st_mode) 
 			&& strcmp(dir1->d_name, ".") 
 			&& strcmp(dir1->d_name, "..")
+			&& strcmp(dir1->d_name, "avg")
 			&& strcmp(dir1->d_name, "avg_power_per_execution")
 			&& strcmp(dir1->d_name, "backup")) )
 			continue;
@@ -389,7 +390,7 @@ int main()
 
 
 		char dirname_avg_power2[MAX_LENGTH];
-		sprintf(dirname_avg_power2, "%s/%s/%s", path, "avg_power_per_execution", dir1->d_name);
+		sprintf(dirname_avg_power2, "%s/avg_power_per_execution/%s", path, dir1->d_name);
 		if (stat(dirname_avg_power2, &dirstat2) == -1) {
 			mkdir(dirname_avg_power2, 0700);
 		}
@@ -400,15 +401,20 @@ int main()
 			fprintf(stderr, "opendir error: Unable to open directory %s\n", dirname);
         	return EXIT_FAILURE;
 		}
+		char dirname_avg_power3[MAX_LENGTH];
+		sprintf(dirname_avg_power3, "results/power_results");
+		if (stat(dirname_avg_power3, &dirstat1) == -1) {
+			mkdir(dirname_avg_power3, 0700);
+		}
 		char  output_filename_dir[MAX_LENGTH];
-		sprintf(output_filename_dir, "%s/avg/%s_avg", path, dir1->d_name);
+		sprintf(output_filename_dir, "results/power_results/%s_avg", dir1->d_name);
 		FILE* output_file = fopen(output_filename_dir, "w");
 		if (output_file == NULL) {
 			// Print an error message to the standard error stream if the output file cannot be opened.
 			fprintf(stderr, "fopen errorr: Unable to open output file!\n");
 			return EXIT_FAILURE;
 		}
-		fputs("\"Avg power\",\"CPU freq\",\"Memory freq\"",output_filename_dir);
+		fputs("\"Avg power\",\"CPU freq\",\"Memory freq\"\n",output_file);
 		fclose(output_file);
 
 		// For each CSV file: get frequencies and apply some operations.
@@ -420,9 +426,9 @@ int main()
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
 				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1, 0);
 				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1, 0);
-				char output_filename1[MAX_LENGTH];
-				sprintf(output_filename1, "%s/%s/%s/%s", path, "avg_power_per_execution", dir1->d_name, dir2->d_name);
-				operation(input_filename, output_filename, CPU_freq, MEM_freq, put_avg_power_per_exec, 0, 0);
+				char output_filename[MAX_LENGTH];
+				sprintf(output_filename, "%s/avg_power_per_execution/%s/%s", path, dir1->d_name, dir2->d_name);
+				//operation(input_filename, output_filename, CPU_freq, MEM_freq, put_avg_power_per_exec, 0, 0);
 				operation(input_filename, output_filename_dir, CPU_freq, MEM_freq, put_avg_power, 0, 1);
 			}
 		}
