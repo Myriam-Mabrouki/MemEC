@@ -134,9 +134,9 @@ int put_max_power_per_exec(	FILE *input_file,
 				max_power = value;
 			}
 		}
-		max_power = -1;
 		sprintf(str_res, "%f,%f,%d,%d\n", timestamp, max_power, CPU_freq, MEM_freq);
 		fputs(str_res, output_file);
+		max_power = -1;
 	}
 	return 0;
 }
@@ -467,7 +467,7 @@ int main()
 			mkdir(dirname_res_power, 0700);
 		}
 		char  output_filename_dir[MAX_LENGTH];
-		sprintf(output_filename_dir, "results/power_results/%s_avg", dir1->d_name);
+		sprintf(output_filename_dir, "results/power_results/%s_avg.csv", dir1->d_name);
 		FILE* output_file = fopen(output_filename_dir, "w");
 		if (output_file == NULL) {
 			// Print an error message to the standard error stream if the output file cannot be opened.
