@@ -486,6 +486,10 @@ int main()
 				get_CPU_freq_and_MEM_freq(dir2->d_name, &CPU_freq, &MEM_freq);
 				//operation(input_filename, "tmp", 0, 0, begin_at_0, 1, 0);
 				//operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1, 0);
+				if (strcmp(dir2->d_name,"ndes_fCPU_1400_fMEM_200_power") == 0) {
+					operation(input_filename, "tmp", 0, 0, begin_at_0, 1, 0);
+					operation(input_filename, "tmp", CPU_freq, MEM_freq, add_CPU_freq_MEM_freq_in_csv, 1, 0);
+				}
 				char output_filename1[MAX_LENGTH], output_filename2[MAX_LENGTH];
 				sprintf(output_filename1, "%s/avg_power_per_execution/%s/%s", path, dir1->d_name, dir2->d_name);
 				sprintf(output_filename2, "%s/max_power_per_execution/%s/%s", path, dir1->d_name, dir2->d_name);
